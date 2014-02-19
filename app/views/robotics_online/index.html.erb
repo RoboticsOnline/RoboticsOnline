@@ -1,0 +1,45 @@
+</header><!-- /header -->
+
+<div id="main-content">
+	<div class="row" id="begin">
+		<!-- Carousel
+			================================================== -->
+		<div class="span8 offset1">
+			<div id="myCarousel" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="item active ">
+						<img src="/assets/picture1.jpg" alt="">
+					</div>
+					<div class="item">
+						<img src="/assets/picture2.jpg" alt="">
+					</div>
+					<div class="item">
+						<img src="/assets/picture3.jpg" alt="">
+					</div>
+				</div>
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div><!-- /.carousel -->
+		</div>
+		<div class="span2 offset1">
+			<div id="sign_up">
+		    	<h3>Registration</h3>
+
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-signin"}) do |f| %>
+					<%= devise_error_messages! %>
+					<h4>Email address</h4>
+					<%= f.email_field :email, :autofocus => true, :class => "input-block-level",  :placeholder => "Email address" %>
+					<h4>Username</h4>
+					<%= f.text_field :username, :class => "input-block-level",  :placeholder => "Username"  %>
+					<h4>Password</h4>
+					<%= f.password_field :password, :class => "input-block-level", :placeholder => "Password" %>
+					<h4>Confirm password</h4>
+					<%= f.password_field :password_confirmation, :class => "input-block-level", :placeholder => "Confirm password" %> 
+
+					<%= f.submit "Sign up", :class => "btn btn-info" %>
+				<% end %>
+	   		</div> <!--/sign_up -->
+	   		
+		</div>
+	</div><!--row-->		
+</div>

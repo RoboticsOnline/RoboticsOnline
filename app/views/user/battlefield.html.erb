@@ -1,0 +1,184 @@
+<div id="main-content" class="container">
+	<div class="row">
+		<div class="siderbar">
+
+			<%= render'sidebar'%>
+
+		</div>
+
+		<div id="main" class="main-content span9">
+			<div class="row">
+				<div class="span2 offset1">
+					<%= current_user.username%>
+					<img src="/assets/user/profile-img.png"/>
+					<div class="stats">
+						<ul id="stats">
+							<li>
+								Attack
+								<span class="pull-right">
+									<%= current_user.robot.stat.attack/2 %> - <%= current_user.robot.stat.attack %> 
+								</span>
+							</li>
+							<li>
+								Strength 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.strength %> 
+								</span>
+							</li> 
+							<li>
+								Agility 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.agility %> 
+								</span>
+							</li>
+							<li>
+								Intelligence 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.intelligence %> 
+								</span>
+							</li> 
+							<li>
+								Stamina 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.stamina %> 
+								</span>
+							</li> 
+							<li>
+								Defence 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.defence %> 
+								</span>
+							</li>  
+							<li>
+								Armor 
+								<span class="pull-right"> 
+									<%= current_user.robot.stat.armor %> 
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<% if @mob != nil %>						
+					<%= button_to "Attack", main_battle_path({id: @mob.id, oponent: "Mob"}), :class => 'btn btn-success', remote: true, :method => :get %>
+				<% else %>
+					<% if @user != nil %>
+						<%= button_to "Attack", main_battle_path({id: @user.robot.id, oponent: "Robot"}), :class => 'btn btn-success', remote: true, :method => :get %>
+					<% end %>
+				<% end %>
+				<div class="span2">
+					<% if current_user.robot.in_fight == false %>
+						<% if @mob.blank? %>
+							<% if @user.blank? %>
+								Find someone 	
+								<%= link_to '<img src="/assets/Question_mark.PNG"/>'.html_safe, battlefield_list_path %>
+							<% else %>
+								<%= @user.username%>	
+								<img src="/assets/user/profile-img.png"/>
+								<div class="stats">
+									<ul id="stats">
+										<li>
+											Attack
+											<span class="pull-right">
+												<%= @user.robot.stat.attack/2 %> - <%= @user.robot.stat.attack %> 
+											</span>
+										</li>
+										<li>
+											Strength 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.strength %> 
+											</span>
+										</li> 
+										<li>
+											Agility 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.agility %> 
+											</span>
+										</li>
+										<li>
+											Intelligence 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.intelligence %> 
+											</span>
+										</li> 
+										<li>
+											Stamina 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.stamina %> 
+											</span>
+										</li> 
+										<li>
+											Defence 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.defence %> 
+											</span>
+										</li>  
+										<li>
+											Armor 
+											<span class="pull-right"> 
+												<%= @user.robot.stat.armor %> 
+											</span>
+										</li>
+									</ul>
+								</div>
+							<% end %>							
+						<% else %>	
+								<%= @mob.name%>						
+								<img src="/assets/mob/<%= @mob.picture %>.jpg"/>
+								<div class="stats">
+									<ul id="stats">
+										<li>
+											Attack
+											<span class="pull-right">
+												<%= @mob.stat.attack/2 %> - <%= @mob.stat.attack %> 
+											</span>
+										</li>
+										<li>
+											Strength 
+											<span class="pull-right"> 
+												<%= @mob.stat.strength %> 
+											</span>
+										</li> 
+										<li>
+											Agility 
+											<span class="pull-right"> 
+												<%= @mob.stat.agility %> 
+											</span>
+										</li>
+										<li>
+											Intelligence 
+											<span class="pull-right"> 
+												<%= @mob.stat.intelligence %> 
+											</span>
+										</li> 
+										<li>
+											Stamina 
+											<span class="pull-right"> 
+												<%= @mob.stat.stamina %> 
+											</span>
+										</li> 
+										<li>
+											Defence 
+											<span class="pull-right"> 
+												<%= @mob.stat.defence %> 
+											</span>
+										</li>  
+										<li>
+											Armor 
+											<span class="pull-right"> 
+												<%= @mob.stat.armor %> 
+											</span>
+										</li>
+									</ul>
+								</div>
+						<% end %>							
+					<% else %>
+						<img src="/assets/user/profile-img.png"/>
+					<% end %>
+				</div>
+				<div class="span2 offset3">
+					<div id="result"></div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /row -->
+</div><!-- /container -->

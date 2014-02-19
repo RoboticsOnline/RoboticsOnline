@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RoboticsOnline</title>
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+
+
+		<%
+			if user_signed_in?
+				redirect_to user_path
+			else
+				redirect_to root_path
+			end
+		%>
+		<!-- FontAwesome -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	</head>
+	<body>
+		<header id="header">
+
+			<div id="nav" class='navbar navbar-inverse navbar-fixed-top'>
+				<div class="navbar-inner">
+					<div class="container">
+						<% if user_signed_in? %>
+							<%= link_to '<div id="logo" class="colored pull-left">RoboticsOnline</div>'.html_safe, user_path%>
+						<% else %>
+							<%= link_to '<div id="logo" class="colored pull-left">RoboticsOnline</div>'.html_safe, root_path%>
+						<% end %>
+
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".main-menu">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+						<div class="nav-collapse main-menu collapse">
+							<% if user_signed_in? %>
+								<ul class="main-menu pull-right">
+									<li><%= link_to '<i class="fa fa-home"></i>'.html_safe, user_path%></li>
+									<li><%= link_to "Guilds", guilds_path %></li>
+									<li><%= link_to "Friends", friends_path %></li>
+									<li><%= link_to "Battles", battles_path %></li>
+									<li><%= link_to "Ranklist", ranklist_path %></li>
+									<li class="dropdown">
+										<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
+										<ul class="dropdown-menu">
+											<li><a href="">Action</a></li>
+											<li><a href="">Another action</a></li>
+											<li><a href="">Something else here</a></li>
+											<li class="divider"></li>
+											<li class="nav-header">Nav header</li>
+											<li><a href="">Separated link</a></li>
+											<li><a href="">One more separated link</a></li>
+											<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+										</ul>
+									</li><!-- /dropdown -->
+								</ul><!-- /main-menu -->
+							<% else %>
+								<div id="sign_in">
+									<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-inline"}) do |f| %>
+								   		<%= f.email_field :email, :autofocus => true, :class => "input-small", :placeholder => "Email" %>
+										<%= f.password_field :password, :class => "input-small", :placeholder => "Password" %>
+								        <% if devise_mapping.rememberable? %>
+											<%= f.label :remember_me, :class => "remember_text" %>
+											<%= f.check_box :remember_me , :class => "checkbox"%>
+										<% end %>
+										<%= f.submit "Sign in", :class => "btn btn-info"%>
+									<% end %>
+							  	</div><!--/sign_in -->
+							<% end %>
+						</div><!-- nav-Collapse -->
+
+					</div>
+				</div><!-- /navbar-inner -->
+			</div><!-- /navbar -->
+
+
+
+
+
+		<%= yield %>
+
+
+		<div class="footer-top">
+			<%= link_to "Team", team_path %><a href=""></a>
+			<%= link_to "Contacts", contacts_path %><a href=""></a>
+			<%= link_to "Game Rules", game_rules_path %><a href=""></a>
+			<%= link_to "Ticket", user_messages_path %></li>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<p>Designed and built with all the love in the world by @mdo and @fat.</p>
+				<p>Code licensed under Apache License v2.0, documentation under CC BY 3.0.</p>
+			</div>
+			<div class="comercial">
+				<!-- Place this tag where you want the +1 button to render. -->
+				<div class="g-plusone" data-size="medium" data-annotation="none"></div>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en">Tweet</a>
+				<div class="fb-like" data-show-faces="false" data-share="false" data-ref="none"  data-href="https://www.facebook.com/roboticsonline" data-layout="standart" data-action="like" data-show-faces="true" data-share="true"></div>
+			</div>
+		</div>
+
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+
+		<script>
+			!function ($) {
+				$(function(){
+					// carousel demo
+					$('#myCarousel').carousel({
+						interval: 3000
+					})
+				})
+			}(window.jQuery)
+		</script>
+
+		<script>
+
+		jQuery(document).ready(function($) {
+			$('.item img').popover({
+				html:true
+			});
+			$('.stat').popover();
+		});
+
+		</script>
+
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+				fjs.parentNode.insertBefore(js, fjs);
+
+			}
+			(document, 'script', 'facebook-jssdk'));
+			$('.uiGrid').hide()
+        </script>
+
+		<script>
+			!function(d,s,id){
+				var js,fjs=d.getElementsByTagName(s)[0];
+				if(!d.getElementById(id)){
+					js=d.createElement(s);
+					js.id=id;js.src="https://platform.twitter.com/widgets.js";
+					fjs.parentNode.insertBefore(js,fjs);
+				}
+			}
+			(document,"script","twitter-wjs");
+		</script>
+
+        <!-- Place this tag after the last +1 button tag. -->
+		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/platform.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+    			$(this).scrollTop(0);
+			});
+		</script>
+	</body>
+</html>

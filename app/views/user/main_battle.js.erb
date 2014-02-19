@@ -1,0 +1,6 @@
+var parent = $('#result').parent();
+var parent2 = $('#validation').parent();
+$('#result').remove();
+$('#validation').remove();
+parent.prepend("<%=j render 'result' %>");
+parent2.prepend("<p>VS</p>");

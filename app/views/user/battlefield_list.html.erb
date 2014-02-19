@@ -1,0 +1,41 @@
+<div id="main-content" class="container">
+	<div class="row">
+		<div class="siderbar">
+
+			<%= render'sidebar'%>
+
+		</div>
+		<div id="main" class="main-content span9">
+			<!-- for .... -->
+			<table class="table" class="battlefield_list">
+				<tr>
+					<th> Name </th>
+					<th> Level </th>
+					<th> Status </th>
+					<th> Feature </th>
+				</tr>
+					<% @users.each do |p| %>
+						<% if p != current_user  %>
+							<% if p.robot.level < (current_user.robot.level + 2) && p.robot.level > (current_user.robot.level - 2) %>
+		 						<tr>
+		 							<td class="list_name"> 
+		 								<%= link_to p.username, show_path({username: p.username}) %> 
+		 							</td>
+		 							<td> <%= current_user.robot.level %></td>
+									<% if current_user.robot.in_fight == false %>
+										<td style="color:#01DF01"> Avaliable </td> 
+									<% else %>
+										<td style="color:#FF0000"> Busy	</td> 
+									<% end %>
+									<td class="list_level">
+										<%= link_to "Attack", battlefield_path({username: p.username}) %> 
+									</td>
+		 						</tr>
+	 						<% end %>
+ 						<% end %>
+					<% end %>
+				</tr>	
+			</table>
+		</div>
+	</div><!-- /row -->
+</div><!-- /container -->

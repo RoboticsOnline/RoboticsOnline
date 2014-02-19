@@ -1,0 +1,39 @@
+// Place all the styles related to the user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#main-content .scrollbar {
+	max-height: 255px;
+}
+
+#main img {
+	width: 150px;
+	height: 150px;
+}
+
+#history {
+	margin-left: 18px;
+	opacity: 0.5;
+
+}
+#history i {
+	color: white;
+	text-decoration: underline;
+}
+.stat a, {
+	color: white;
+}
+.stat a:hover {
+	color: green;
+	text-decoration: none;
+}
+.list_name a,
+.list_level a, {
+	color:#FFFFFF; 
+	text-decoration: none;
+} 
+.list_name a:hover,
+.list_level a:hover {
+	color: white;
+	text-decoration: none;
+}

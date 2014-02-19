@@ -1,0 +1,48 @@
+// Place all the styles related to the robotics_online controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#check {
+	background-color: red;
+	width: 700px;
+}
+
+/* 1.CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      width: 750px;
+      margin-bottom: 60px;
+      margin-right: 100px;
+      margin-left: 0;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 50px;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    #sign_ip {
+        margin-left: 50px;
+    }
+    #begin {
+        margin-top: 140px;
+    }

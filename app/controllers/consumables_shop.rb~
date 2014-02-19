@@ -1,0 +1,55 @@
+class UserController < ApplicationController
+  def index
+  end
+
+	def battlefield
+		test = User.find(current_user.id).robot.level 
+		User.find(current_user.id).robot.level = test + 1
+	end
+
+	def increase_stats
+	  	stat_id = params[:stat_id]
+	  	case stat_id
+		when 1 #attack
+
+		when 2 #strength
+
+		when 3 #agility
+
+		when 4 #intelligence
+
+		when 5 #stamina
+
+		when 6 #defence
+
+		when 7 #armor
+
+		else
+	  		puts "Error! Not a stat_id!"
+		end
+	end
+
+	def messages
+
+	end
+
+	def general_shop
+
+	end
+
+	def consumables_shop
+
+	end
+
+	def vipzone
+
+	end
+
+	def search
+
+	end
+
+	def fight
+
+	end 
+end

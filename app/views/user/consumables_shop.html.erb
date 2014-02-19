@@ -1,0 +1,48 @@
+<div id="main-content" class="container">
+	<div class="row">
+
+		<aside id="sidebar" class="span3">
+
+			<div class="btn-group wide-fat">
+				<button class="btn btn-large">Dashboard</button>
+				<button class="btn btn-large btn-primary dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><%= link_to "Battlefield", user_battlefield_path %></li>
+					<li><%= link_to "Messages", user_messages_path %></li>
+					<li><%= link_to "General Shop ", user_general_shop_path %></a></li>
+					<li><%= link_to "Consumables Shop", user_consumables_shop_path %> </a></li>
+					<li><%= link_to "VipZone", user_vipzone_path %> </a></li>
+					<li><%= link_to "Search", user_search_path %> </a></li>
+					<li><%= link_to "Fight", user_fight_path %> </a></li>
+				</ul>
+			</div>
+
+			<div class="user-info">
+				<h2 class='user-name'> <%= current_user.username%> </h2>
+				<h4 class="user-level">Level: <%= current_user.robot.level%> </h4>
+				<% if current_user.robot.unused_talent_points > 0 %>
+					<span class="label label-warning"> +<%= current_user.robot.unused_talent_points%> </span>
+				<% end %>
+			</div>
+
+			<div class="profile-image">
+				<img src="/assets/profile-img.png" alt="">
+			</div>
+
+			<div class="stats">
+				<ul>
+					<li>Attack <span class="pull-right"><%= current_user.robot.stat.attack/2 %> - <%= current_user.robot.stat.attack %> <i class="fa fa-plus-circle disabled"></i></span></li>
+					<li>Strength <span class="pull-right"> <%= current_user.robot.stat.strength %> <i class="fa fa-plus-circle"></i></span></li>
+					<li>Agility <span class="pull-right"> <%= current_user.robot.stat.agility %> <i class="fa fa-plus-circle"></i></span></li>
+					<li>Intelligence <span class="pull-right"> <%= current_user.robot.stat.intelligence %> <i class="fa fa-plus-circle"></i></span></li>
+					<li>Stamina <span class="pull-right"> <%= current_user.robot.stat.stamina %> <i class="fa fa-plus-circle"></i></span></li>
+					<li>Defence <span class="pull-right"> <%= current_user.robot.stat.defence %> <i class="fa fa-plus-circle"></i></span></li>
+					<li>Armor <span class="pull-right"> <%= current_user.robot.stat.armor %> <i class="fa fa-plus-circle"></i></span></li>
+				</ul>
+			</div><!-- /stats1 -->
+
+		</aside><!-- /sidebar -->
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div id="result">
+	<p> Result: <%=  Battle.where(:robot_id => current_user.robot.id).last.winner %> won </p>
+	<div class="recent-activity">
+		<h4 class="section-title">Combat Log:</h4>
+		<ul>
+			<% Battle.where(:robot_id => current_user.robot.id).last.combat_log.split('\n').each do |line| %>
+				<li> <%= line %> </li>
+			<% end %>
+		</ul>
+	</div><!-- /recent-actibity -->
+</div>

@@ -1,0 +1,408 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+html {
+	background: url("/assets/bg.jpg") no-repeat top center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+body {
+	background: none;
+	background-color: none;
+}
+
+.wide-fat { width: 100%; }
+
+/**
+ * 2. HEADER
+ * ============================================================
+ */
+
+#nav .navbar-inner {
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+#logo {
+	width: 270px;
+	height: 19px;
+	background: url("/assets/logo.png") no-repeat center center;
+	display:block;
+	text-indent:-9999px;
+}
+
+#nav ul.main-menu {
+	margin: 0;
+	padding: 0;
+}
+
+ul.main-menu li {
+	float: left;
+	list-style: none;
+	margin: 0 10px;
+
+}
+
+#nav ul.main-menu li > a {
+	color: #aaa;
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-size: 16px;
+
+
+}
+
+#nav ul.main-menu li > a:hover {
+	text-decoration: none;
+	color: white;
+	background: #111;
+	box-shadow: 0 1px 1px rgba(50, 50, 50, 1);
+}
+
+#nav ul.main-menu li:first-child a:hover {
+	background: #4267cb;
+}
+
+#nav ul.main-menu li:last-child i {
+	padding-right: 10px;
+}
+
+#nav ul.main-menu li:last-child a:hover {
+	background: #4267cb;
+}
+
+#nav ul.main-menu .dropdown-menu {
+	margin: 0;
+	padding: 0;
+}
+
+#nav ul.main-menu .dropdown-menu li {
+	float: none;
+	border-radius: none;
+	margin: 0;
+}
+
+#nav ul.main-menu .dropdown-menu li a {
+	border-radius: 0px;
+	color: #333;
+	display: block;
+	float: none;
+}
+
+#nav ul.main-menu .dropdown-menu li a:hover {
+	background: #333;
+	color: white;
+}
+
+
+#nav2 {
+	margin-top: 80px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.3)
+}
+
+#nav2 .container {
+	max-width: 1170px;
+}
+
+#nav2 .current-user a {
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #faa732;
+	*background-color: #f89406;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+	background-image: -o-linear-gradient(top, #fbb450, #f89406);
+	background-image: linear-gradient(to bottom, #fbb450, #f89406);
+	background-repeat: repeat-x;
+	border-color: #f89406 #f89406 #ad6704;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+#nav2 .current-user a:hover,
+#nav2 .current-user a:focus,
+#nav2 .current-user a:active,
+#nav2 .current-user a.active,
+#nav2 .current-user a.disabled,
+#nav2 .current-user a[disabled] {
+  color: #ffffff;
+  background-color: #f89406;
+  *background-color: #df8505;
+}
+
+#nav2 .current-user a:active,
+#nav2 .current-user a.active {
+  background-color: #c67605;
+}
+
+#nav2 .progress-bar {
+	width: 300px;
+	margin-top: 10px;
+}
+#nav2 .progress {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+#nav2 .progress-bar small {
+	margin-right: 5px;
+	color: #ccc;
+}
+
+#nav2 .gem {
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #006dcc;
+	*background-color: #0044cc;
+	background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+	background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+	background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+	background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+	background-repeat: repeat-x;
+	border-color: #0044cc #0044cc #002a80;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+#nav2 .gem a {
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#nav2 .navbar-inner {
+	border-radius:0;
+}
+
+
+
+/**
+ * 2. MAIN CONTENZT
+ * ============================================================
+ */
+
+#main-content {
+	color: white;
+}
+
+#main .section-title {
+	text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+#main-content .equipment .item:first-child,
+#main-content .inventory .item:first-child {
+	margin-left: 0;
+}
+
+#main-content .equipment .item:last-child,
+#main-content .inventory .item:last-child {
+	margin-right: 0;
+}
+
+#main-content .equipment .item,
+#main-content .inventory .item {
+	width: 82px;
+	height: 82px;
+
+	background: url("/assets/empty.png") no-repeat top left;
+	display: block;
+
+	float: left;
+	margin-left: 3px;
+	margin-bottom: 3px;
+}
+
+#main-content .item.empty {
+	-moz-transition:.2s linear;
+	-webkit-transition:.2s linear;
+	transition:.2s linear;
+}
+
+#main-content .item.empty:hover {
+	opacity: 0.7;
+
+	background-color: #1670CC ;
+	-moz-transition:.0s ease-out;
+	-webkit-transition:.0s ease-out;
+	transition:.0s ease-out;
+}
+
+#main-content .recent-activity {
+	margin-top: 20px;
+}
+
+#main-content .recent-activity ul {
+	margin: 0;
+}
+
+#main-content .recent-activity ul li {
+	list-style: none;
+	border-bottom: 1px solid #315dc9;
+	padding: 5px 0;
+	padding-left: 20px;
+}
+
+/**
+ * 3. SIDEBAR
+ * ============================================================
+ */
+
+#sidebar .profile-image {
+	width: 100%;
+	height: auto;
+
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 15px;
+}
+
+#sidebar .user-info .user-name {
+	margin: 15px 0 0 0;
+}
+
+#sidebar .user-info .user-name,
+#sidebar .user-info .user-level {
+	text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+#sidebar .user-info .user-level,
+#sidebar .user-info .label {
+	display: inline-block;
+}
+
+#sidebar .user-info .label {
+	margin-left: 5px;
+}
+
+#sidebar .stats ul {
+	margin: 0;
+}
+
+#sidebar .stats ul li {
+	list-style: none;
+	border-bottom: 1px solid #315dc9;
+	padding: 5px 0;
+}
+
+#sidebar .stats ul li form {
+	margin: 0;
+	display: inline-block;
+}
+
+#sidebar .stats ul li form button {
+	background: transparent;
+	border: none;
+}
+
+
+#sidebar ul li span,
+#sidebar ul li span i.disabled {
+	color: #9cb5ed;
+}
+
+#sidebar ul li span i {
+	color: white;
+}
+
+#footer {
+	background-color: #1c1c1c;
+	padding: 50px 0;
+	text-align: center;
+	color: #888;
+}
+
+.footer-top {
+	background: #fd7700;
+	margin-top: 60px;
+	margin-bottom: -10px;
+	text-align: center;
+	padding: 7px 0;
+
+
+	background-image: -webkit-linear-gradient(top, #fd7700, #b85600);
+	background-image: -moz-linear-gradient(top, #fd7700, #b85600);
+	background-image: -ms-linear-gradient(top, #fd7700, #b85600);
+	background-image: -o-linear-gradient(top, #fd7700, #b85600);
+	background-image: linear-gradient(top, #fd7700, #b85600);
+
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+}
+
+
+.footer-top a {
+	color: white;
+	padding-bottom: 10px;
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.footer-top a:hover {
+	text-decoration: none;
+}
+
+/**
+ * 4. MEDIA QUERIES
+ * ============================================================
+ */
+@media (min-width: 768px) and (max-width: 979px) {
+	#nav2 {
+		margin-top: -20px;
+	}
+}
+
+@media (max-width: 767px) {
+	#nav2 {
+		margin: -20px -20px 0 -20px;
+	}
+}
+
+@media (max-width: 480px) {
+	#nav2 {
+		margin: -20px -20px 0 -20px;
+	}
+}
+
+/* make the like button smaller */
+.fb_edge_widget_with_comment iframe
+{
+    width:47px !important;
+}
+
+/* but make the span that holds the comment box larger */
+span.fb_edge_comment_widget.fb_iframe_widget iframe
+{
+    width:401px !important;
+}
+
+.comercial {
+	padding-top: 10px;
+	padding-left: 385px; /* trqbva da e v % */
+}
+
+#sign_in {	
+	float: right;
+	margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.stat a:hover {
+	color: white;
+}
