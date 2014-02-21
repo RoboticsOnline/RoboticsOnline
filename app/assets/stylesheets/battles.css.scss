@@ -1,3 +1,14 @@
 // Place all the styles related to the battles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.list_name a,
+.history a, {
+	color:#FFFFFF; 
+	text-decoration: none;
+} 
+.list_name a:hover,
+.history a:hover {
+	color: white;
+	text-decoration: none;
+}

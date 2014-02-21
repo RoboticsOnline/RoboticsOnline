@@ -15,6 +15,11 @@ group :production do
 	gem 'pg'
 end
 
+group :assets do
+  gem 'bootstrap-sass'
+  gem 'font-awesome-rails'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

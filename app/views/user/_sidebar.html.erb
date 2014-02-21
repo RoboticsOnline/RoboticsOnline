@@ -7,11 +7,11 @@
 		</button>
 		<ul class="dropdown-menu">
 			<li><%= link_to "Battlefield", battlefield_path %></li>
-			<li><%= link_to "Messages", user_messages_path %></li>
-			<li><%= link_to "General Shop ", user_general_shop_path %></a></li>
-			<li><%= link_to "Consumables Shop", user_consumables_shop_path %> </a></li>
-			<li><%= link_to "VipZone", user_vipzone_path %> </a></li>
-			<li><%= link_to "Search", user_search_path %> </a></li>
+			<li><%= link_to "Messages", messages_path %></li>
+			<li><%= link_to "General Shop ", general_shop_path %></a></li>
+			<li><%= link_to "Consumables Shop", consumables_shop_path %> </a></li>
+			<li><%= link_to "VipZone", vipzone_path %> </a></li>
+			<li><%= link_to "Search", search_path %> </a></li>
 			<li><%= link_to "Fight", fight_path %> </a></li>
 		</ul>
 	</div>
@@ -34,7 +34,7 @@
 					<div class="bar" style="width:<%= x = current_user.robot.current_health.to_f / current_user.robot.max_health.to_f * 100.0 %>%;" >
 						<%= current_user.robot.current_health %>
 					</div> 
-				<small class='pull-right' style="color: black" ><%= current_user.robot.max_health %></small>
+				<small class='pull-right'><%= current_user.robot.max_health %></small>
 				</div>
 	</div><!-- /progress-bar -->
 	<div class="stats">

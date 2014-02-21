@@ -41,13 +41,10 @@
 									<li class="dropdown">
 										<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="">Action</a></li>
-											<li><a href="">Another action</a></li>
-											<li><a href="">Something else here</a></li>
 											<li class="divider"></li>
-											<li class="nav-header">Nav header</li>
-											<li><a href="">Separated link</a></li>
-											<li><a href="">One more separated link</a></li>
+											<li class="nav-header">Edit Profile</li>
+											<li><%= link_to "Change Password", user_path, :method => :get %></li>
+											<li><%= link_to "Change Picture", user_path, :method => :get %></li>
 											<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 										</ul>
 									</li><!-- /dropdown -->
@@ -80,21 +77,16 @@
 									<li class="active current-user"><a href=""> <%= current_user.username%> </a></li>
 									<li class="disabled"><a class='inactive' href="">Level <%= current_user.robot.level%></a></li>
 									<li class='progress-bar'>
-										<div class="progress progress-warning progress-striped active">
+										<div class="progress progress-warning progress-striped active" id="experience">
 											<div class="bar" style="width:<%= x = current_user.robot.current_experience.to_f / current_user.robot.max_experience.to_f * 100.0 %>%;"> <%= current_user.robot.current_experience%></div> <small class='pull-right'> <%= current_user.robot.max_experience%> </small>
 										</div>
 									</li><!-- /progress-bar -->
 								</ul><!-- /nav -->
-									<ul class="nav pull-right">
-									<li class="disabled"><a href=""><i class='fa fa-ticket -o'></i> <%= current_user.resource.gold%> </a></li>
-									<li class="divider-vertical"></li>
-									<li class="disabled"><a href=""><i class='fa fa-bolt'></i> <%= current_user.resource.electricity%> </a></li>
-									<li class="divider-vertical"></li>
-									<li class="disabled"><a href=""><i class='fa fa-tint'></i> <%= current_user.resource.oil%></a></li>
-									<li class="divider-vertical"></li>
-									<li class="disabled"><a href=""><i class='fa fa-envelope-o'></i> 300</a></li>
-									<li class="disabled gem"><a href=""><i class='fa fa-trophy'></i> <%= current_user.resource.cristals%></a></li>
-								</ul><!-- /nav -->
+								<div class="stats">
+
+									<%= render'resource'%>
+
+								</div>
 							<div>
 
 						</div><!-- /container -->
@@ -110,7 +102,7 @@
 			<%= link_to "Team", team_path %><a href=""></a>
 			<%= link_to "Contacts", contacts_path %><a href=""></a>
 			<%= link_to "Game Rules", game_rules_path %><a href=""></a>
-			<%= link_to "Ticket", user_messages_path %></li>
+			<%= link_to "Ticket", ticket_path %></li>
 		</div>
 		<div id="footer">
 			<div class="container">

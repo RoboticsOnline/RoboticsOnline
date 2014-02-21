@@ -1,48 +1,28 @@
 <div id="main-content" class="container">
 	<div class="row">
+		<div class="siderbar">
 
-		<aside id="sidebar" class="span3">
+			<%= render'sidebar'%>
 
-			<div class="btn-group wide-fat">
-				<button class="btn btn-large">Dashboard</button>
-				<button class="btn btn-large btn-primary dropdown-toggle" data-toggle="dropdown">
-				<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><%= link_to "Battlefield", user_battlefield_path %></li>
-					<li><%= link_to "Messages", user_messages_path %></li>
-					<li><%= link_to "General Shop ", user_general_shop_path %></a></li>
-					<li><%= link_to "Consumables Shop", user_consumables_shop_path %> </a></li>
-					<li><%= link_to "VipZone", user_vipzone_path %> </a></li>
-					<li><%= link_to "Search", user_search_path %> </a></li>
-					<li><%= link_to "Fight", user_fight_path %> </a></li>
-				</ul>
+		</div>
+		<div id="main" class="main-content span9">
+			<div class="row">
+				<div id="consumables" class="offset1">
+					<% if current_user.resource.gold >= 30 %>
+						<% if current_user.robot.current_health < current_user.robot.max_health %>
+							<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', :method => :get, remote: true %> - 30 gold
+						<% else %>
+							<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', :method => :get, :disabled => true %> - You are on full Health
+						<% end %>
+						<%= button_to "Gain 100 Electricity", get_consumables_path({consumable: "Electricity"}), :class => 'btn btn-success', :method => :get, remote: true %> - 30 gold
+						<%= button_to "Gain 50 Oil", get_consumables_path({consumable: "Oil"}), :class => 'btn btn-success', :method => :get, remote: true %> - 30 gold
+					<% else %>
+						<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', :method => :get, :disabled => true %> - not enough gold 
+						<%= button_to "Gain 100 Electricity", get_consumables_path({consumable: "Electricity"}), :class => 'btn btn-success', :method => :get, :disabled => true %> - not enough gold 
+						<%= button_to "Gain 50 Oil", get_consumables_path({consumable: "Oil"}), :class => 'btn btn-success', :method => :get, :disabled => true %> - not enough gold 
+					<% end %>
+				</div>
 			</div>
-
-			<div class="user-info">
-				<h2 class='user-name'> <%= current_user.username%> </h2>
-				<h4 class="user-level">Level: <%= current_user.robot.level%> </h4>
-				<% if current_user.robot.unused_talent_points > 0 %>
-					<span class="label label-warning"> +<%= current_user.robot.unused_talent_points%> </span>
-				<% end %>
-			</div>
-
-			<div class="profile-image">
-				<img src="/assets/profile-img.png" alt="">
-			</div>
-
-			<div class="stats">
-				<ul>
-					<li>Attack <span class="pull-right"><%= current_user.robot.stat.attack/2 %> - <%= current_user.robot.stat.attack %> <i class="fa fa-plus-circle disabled"></i></span></li>
-					<li>Strength <span class="pull-right"> <%= current_user.robot.stat.strength %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Agility <span class="pull-right"> <%= current_user.robot.stat.agility %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Intelligence <span class="pull-right"> <%= current_user.robot.stat.intelligence %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Stamina <span class="pull-right"> <%= current_user.robot.stat.stamina %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Defence <span class="pull-right"> <%= current_user.robot.stat.defence %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Armor <span class="pull-right"> <%= current_user.robot.stat.armor %> <i class="fa fa-plus-circle"></i></span></li>
-				</ul>
-			</div><!-- /stats1 -->
-
-		</aside><!-- /sidebar -->
+		</div>
 	</div>
 </div>

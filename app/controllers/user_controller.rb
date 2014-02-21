@@ -23,40 +23,184 @@ class UserController < ApplicationController
 		
 	end
 
+	def get_consumables
+		if params[:consumable] == "Electricity"
+			current_user.resource.electricity += 100
+		else 
+			if params[:consumable] == "Oil"
+				current_user.resource.oil += 50
+			else
+				current_user.robot.current_health = current_user.robot.max_health
+				current_user.robot.save
+			end
+		end
+		current_user.resource.gold -= 30
+		current_user.resource.save
+
+	
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	def main_battle 
 		if params[:oponent] == "Mob"
 			oponent_stat = Mob.find(params[:id]).stat	
 			oponent_health = (oponent_stat.stamina - 33) * 30 + 1000	
+			current_user.resource.electricity -= 30
 		else 
 			oponent_stat = Robot.find(params[:id]).stat
 			oponent_health = Robot.find(params[:id]).current_health
+			current_user.resource.electricity -= 40
 		end
-		combat_log = "asdasd asd asd asd asd asd asda sd \n asd asd \n fdsffds"
-############ Main Battle
-# trqbva da vada ot 30-50 electricity v zavisimost ot protivnika
-# i trqbva da maham oil pri white hits
-# combat log-aa
-		oponent_special_attack = 1
-		current_user_special_attack = 1
-		#while current_user.robot.current_health > 0 && oponent_health > 0 do
-			#sadasd
-		#end
+		current_user.resource.save
+		combat_log = ""
 
-#########
+		current_user_special_attack = 0
+		oponent_special_attack = 0
+		current_user_mana = (current_user.robot.stat.intelligence - 20)*5 + 100
+		oponent_mana = (oponent_stat.intelligence - 20)*5 + 100
+		attack_turn = 1
+		i = 0
+		while current_user.robot.current_health > 0 && oponent_health > 0 do
+			hit = 0
+			i += 1
+			if attack_turn == 1
+				attack_turn = 2
+				if current_user.resource.oil > 2
+					current_user.resource.oil -= 2
+					current_user.resource.save
+					hit = rand((current_user.robot.stat.attack/2)..(current_user.robot.stat.attack))
+					combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
+				else 
+					if current_user.resource.electricity > 4
+						current_user.resource.electricity -= 4
+						current_user.resource.save
+						hit = rand((current_user.robot.stat.attack/2)..(current_user.robot.stat.attack))
+						combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
+					end
+				end
+				if current_user_special_attack == 3
+					if current_user_mana >= 20 
+						hit += current_user.robot.stat.strength*2
+						combat_log += "Attack_turn1 hit.special #{hit.to_s}\n"
+						current_user_mana -= 20
+					end
+					current_user_special_attack = 0
+				else 
+					current_user_special_attack += 1
+				end
+				if  rand(100) <= (current_user.robot.stat.agility - 18)*0.29 + 5.14
+					hit = (hit*1.5).to_i 
+					combat_log += "Attack_turn1 hit.crit #{hit.to_s}\n"					
+				end
+				if hit > oponent_stat.armor/2 
+					hit -= oponent_stat.armor/2
+				end
+				combat_log += "Attack_turn1 hit.reduce #{hit.to_s}\n"
+				if rand(100) <= (oponent_stat.defence/30).to_i
+					hit = 0
+					combat_log += "Attack_turn1 hit.block #{hit.to_s}\n"
+				end
+				oponent_health -= hit
+			else 
+				attack_turn = 1
+				if params[:oponent] == "Robot"
+					u = User.find(Robot.find(params[:id]).user_id)
+					if u.resource.oil > 2
+						u.resource.oil -= 2
+						u.resource.save
+						hit = rand((oponent_stat.attack/2)..(oponent_stat.attack))
+						combat_log += "Attack_turn2 hit.white #{hit.to_s}\n"
+					else 
+						if u.resource.electricity > 4
+							u.resource.electricity -= 4
+							u.resource.save
+							hit = rand((oponent_stat.attack/2)..(oponent_stat.attack))
+							combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
+						end
+					end
+					if oponent_special_attack == 3
+						if oponent_mana >= 20 
+							hit += oponent_stat.strength*2
+							combat_log += "Attack_turn2 hit.special #{hit.to_s}\n"
+							oponent_mana -= 20
+						end
+						oponent_special_attack = 0
+					else 
+						oponent_special_attack += 1
+					end
+					if rand(100) <= (oponent_stat.agility - 18)*0.29 + 5.14
+						hit = (hit*1.5).to_i 
+						combat_log += "Attack_turn2 hit.crit #{hit.to_s}\n"
+					end
+					if hit > current_user.robot.stat.armor/2
+						hit -= current_user.robot.stat.armor/2
+					end
+					combat_log += "Attack_turn2 hit.reduce #{hit.to_s}\n"
+					if rand(100) <= (current_user.robot.stat.defence/30).to_i
+						hit = 0 
+						combat_log += "Attack_turn2 hit.block #{hit.to_s}\n"
+					end
+					current_user.robot.current_health -= hit
+				else
+					hit = rand((oponent_stat.attack/2)..(oponent_stat.attack*2/3))
+					combat_log += "Attack_turn2 hit.white #{hit.to_s}\n"
+					if oponent_special_attack == 3
+						if oponent_mana >= 20 
+							hit += oponent_stat.strength*2
+							#combat_log += "Attack_turn2 hit.special #{hit.to_s}\n"
+							oponent_mana -= 20
+						end
+						oponent_special_attack = 0
+					else 
+						oponent_special_attack += 1
+					end
+					if rand(100) <= (oponent_stat.agility - 18)*0.29 + 5.14
+						hit = (hit*1.5).to_i 
+						combat_log += "Attack_turn2 hit.crit #{hit.to_s}\n"
+					end
+					if hit > current_user.robot.stat.armor/2
+						hit -= current_user.robot.stat.armor/2
+					end
+					combat_log += "Attack_turn2 hit.reduce #{hit.to_s}\n"
+					if rand(100) <= (current_user.robot.stat.defence/30).to_i
+						hit = 0 
+						combat_log += "Attack_turn2 hit.block #{hit.to_s}\n"
+					end
+					current_user.robot.current_health -= hit
+				end
+			end
+		end
+		if 	current_user.robot.current_health <= 0
+			current_user.robot.current_health = 1
+		end
+		current_user.robot.save
+		if params[:oponent] == "Robot"
+			r = Robot.find(params[:id])
+			if oponent_health <= 0
+				r.current_health = 1
+			else 
+				r.current_health = oponent_health
+			end
+			r.save
+		end
+		
 		if current_user.robot.current_health > oponent_health
 			if params[:oponent] == "Mob"
 				Battle.create(:winner => current_user.username, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
 				m = Mob.find(params[:id]) 
 				m.lost = true
 				m.save
+				rewarding(current_user, current_user.robot.max_experience/7, current_user.robot.max_experience/7 - current_user.robot.level)
 			else 
 				Battle.create(:winner => current_user.username, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
+				rewarding(current_user, rand(current_user.robot.max_experience/7..current_user.robot.max_experience/7 + current_user.robot.level), current_user.robot.max_experience/7 + current_user.robot.level)
 			end
-			rewarding(current_user, 50, 50)
 		else 
 			if params[:oponent] == "Robot"
 				Battle.create(:winner => Robot.find(params[:id]).name, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
-				rewarding(User.find(Robot.find(params[:id]).user_id), 50, 50)	
+				rewarding(User.find(Robot.find(params[:id]).user_id), User.find(Robot.find(params[:id]).user_id).robot.max_experience + (current_user.robot.level - User.find(Robot.find(params[:id]).user_id).robot.level), User.find(Robot.find(params[:id]).user_id).robot.max_experience/7 + User.find(Robot.find(params[:id]).user_id).robot.level)
 			else 
 				Battle.create(:winner => Mob.find(params[:id]).name, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)	
 			end
@@ -66,6 +210,7 @@ class UserController < ApplicationController
 			format.js
 		end
 	end
+
 
 	def rewarding(winner, gold, experience)
 		winner.resource.gold += gold

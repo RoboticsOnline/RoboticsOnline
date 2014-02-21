@@ -8,30 +8,34 @@ RoboticsOnline::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'robotics_online#index'
   get 'ranklist' => 'ranklist#index', :as => :ranklist
+  get 'battles' => 'battles#index', :as => :battles
   get 'guilds' => 'guilds#index', :as => :guilds
   get 'friends' => 'friends#index', :as => :friends
-  get 'battles' => 'battles#index', :as => :battles
   get 'team' => 'team#index', :as => :team
+  get 'ticket' => 'ticket#index', :as => :ticket
   get 'contacts' => 'contacts#index', :as => :contacts
   get 'game_rules' => 'game_rules#index', :as => :game_rules
   
-  match "/user/messages" => "user#messages", via: :get
-  match "/user/general_shop" => "user#general_shop", via: :get
-  match "/user/consumables_shop" => "user#consumables_shop", via: :get
-  match "/user/vipzone" => "user#vipzone", via: :get
-  match "/user/search" => "user#search", via: :get
+  
 
   get 'user' => 'user#index', :as => :user
-  get '/account/:username' => 'user#show', as: 'show'
+  get '/battle/:id' => 'battles#show', as: 'show_battle'
+  get '/profile/:username' => 'user#show', as: 'show_user'
   get '/battlefield/user/:username' => 'user#battlefield', as: 'battlefield_user'
   get '/battlefield/mob/:id' => 'user#battlefield', as: 'battlefield_mob'
 
   controller :user do 
     get 'set_stat' => :set_stat
+    get 'consumables_shop' => :consumables_shop
     get 'main_battle' => :main_battle
+    get 'get_consumables' => :get_consumables
     get 'battlefield' => :battlefield
     get 'battlefield_list' => :battlefield_list
     get 'fight' => :fight
+    get 'messages' => :messages
+    get 'general_shop' => :general_shop
+    get 'vipzone' => :vipzone
+    get 'search' => :search
   end
 
   # Example of regular route:

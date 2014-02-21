@@ -17,6 +17,7 @@ html {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	font-size: 100%;
 }
 
 body {
@@ -237,7 +238,7 @@ ul.main-menu li {
 #main-content .item.empty:hover {
 	opacity: 0.7;
 
-	background-color: #1670CC ;
+	background-color: #1670CC;
 	-moz-transition:.0s ease-out;
 	-webkit-transition:.0s ease-out;
 	transition:.0s ease-out;
@@ -405,4 +406,9 @@ span.fb_edge_comment_widget.fb_iframe_widget iframe
 
 .stat a:hover {
 	color: white;
+}
+
+#main-content .progress-bar small {
+	margin-right: 5px;
+	color: black;
 }

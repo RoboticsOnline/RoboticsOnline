@@ -24,9 +24,18 @@
 	color: white;
 }
 .stat a:hover {
-	color: green;
+	color: white;
 	text-decoration: none;
 }
+.popover-title {
+    color: blue;
+    font-size: 15px;
+}
+.popover-content {
+    color: #1670CC;
+    font-size: 12px;
+}
+
 .list_name a,
 .list_level a, {
 	color:#FFFFFF; 

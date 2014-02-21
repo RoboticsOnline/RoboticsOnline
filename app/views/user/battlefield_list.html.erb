@@ -19,17 +19,32 @@
 							<% if p.robot.level < (current_user.robot.level + 2) && p.robot.level > (current_user.robot.level - 2) %>
 		 						<tr>
 		 							<td class="list_name"> 
-		 								<%= link_to p.username, show_path({username: p.username}) %> 
+		 								<%= link_to p.username, show_user_path({username: p.username}) %> 
 		 							</td>
-		 							<td> <%= current_user.robot.level %></td>
-									<% if current_user.robot.in_fight == false %>
-										<td style="color:#01DF01"> Avaliable </td> 
+		 							<td> <%= p.robot.level %></td>
+		 							<% b = Battle.where(:robot_id => p.robot.id, :oponent_id => current_user.robot.id) + Battle.where(:robot_id => current_user.robot.id, :oponent_id => p.robot.id)
+		 								@win_ratio = 0
+		 								b.each do |f|
+		 									if f.winner == current_user.username
+		 										@win_ratio += 1
+		 									else 
+		 										@win_ratio -= 1
+		 									end 
+		 								end
+		 							%>
+	 								<% if @win_ratio < 3 %>
+										<% if current_user.robot.in_fight == false %>
+											<td style="color:#01DF01"> Avaliable </td> 
+										<% else %>
+											<td style="color:#FF0000"> Busy	</td> 
+										<% end %>
+										<td class="list_level">
+											<%= link_to "Attack", battlefield_path({username: p.username}) %> 
+										</td>
 									<% else %>
 										<td style="color:#FF0000"> Busy	</td> 
+										<td class="list_level"> Attack </td>
 									<% end %>
-									<td class="list_level">
-										<%= link_to "Attack", battlefield_path({username: p.username}) %> 
-									</td>
 		 						</tr>
 	 						<% end %>
  						<% end %>

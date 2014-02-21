@@ -1,2 +1,32 @@
-<h1>Battles#index</h1>
-<p>Find me in app/views/battles/index.html.erb</p>
+<div id="main-content" class="container">
+	<div class="row">
+		<div id="main" class="main-content span9 offset1">
+			<table class="table" class="battlefield_list">
+				<tr>
+					<th> Attacker </th>
+					<th> Deffender </th>
+					<th> Status </th>
+					<th> History </th>
+				</tr>
+					<% @battles.reverse_each do |b| %>
+						<tr>
+							<td class="list_name"> 
+								<%= link_to Robot.find(b.robot_id).name, show_user_path({username: Robot.find(b.robot_id).name}) %>
+							</td>
+							<td class="list_name"> 
+								<%= link_to Robot.find(b.oponent_id).name, show_user_path({username: Robot.find(b.oponent_id).name}) %>
+							</td>
+							<% if Robot.find(b.robot_id).name == b.winner %>
+								<td> Won the Battle </td>
+							<% else %>	
+								<td> Lost the Battle </td>
+							<% end %>
+								
+							<td class="history"> <%= link_to "View", show_battle_path({id: b.id}) %> </td>
+						</tr>	
+					<% end %>
+			</table>
+		</div>
+	</div><!-- /row -->
+</div><!-- /container -->
+
