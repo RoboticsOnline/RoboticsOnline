@@ -1,0 +1,33 @@
+<table class="table" id="ranklist">
+	<tr>
+		<th class="list_name"> <%= link_to "Username", sort_by_path({by: "Username"}), remote: true, :method => :get %> </th>
+		<th class="list_name"> <%= link_to "Level", sort_by_path({by: "Level"}), remote: true, :method => :get %> </th>
+		<th class="list_name"> <%= link_to "Battles", sort_by_path({by: "Battles"}), remote: true, :method => :get %> </th>
+		<th class="list_name"> <%= link_to "Battles Won", sort_by_path({by: "Battles_Won"}), remote: true, :method => :get %> </th>
+		<th class="list_name"> <%= link_to "Battles Lost", sort_by_path({by: "Battles_Lost"}), remote: true, :method => :get %> </th>
+	</tr>
+	<% @users.each do |u| %>
+		<tr>
+			<td class="list_name"> 
+				<%= link_to u.username, show_user_path({username: u.username}) %>
+			</td>
+			<td> 
+				<%= u.robot.level %>
+			</td>
+			<% b = Battle.where(:robot_id => u.robot.id) + Battle.where(:oponent_id => u.robot.id)
+					@wins = 0
+					@lost = 0
+					b.each do |f|
+						if f.winner == u.username
+							@wins += 1
+						else 
+							@lost += 1
+						end 
+					end
+				%>
+			<td> <%= @wins + @lost %></td>
+			<td> <%= @wins %></td>
+			<td> <%= @lost %></td>	
+		</tr>	
+	<% end %>
+</table>

@@ -24,11 +24,15 @@ RoboticsOnline::Application.routes.draw do
   get '/battlefield/user/:username' => 'user#battlefield', as: 'battlefield_user'
   get '/battlefield/mob/:id' => 'user#battlefield', as: 'battlefield_mob'
 
+  controller :ranklist do
+    get 'sort_by' => :sort_by
+  end
+  
   controller :user do 
     get 'set_stat' => :set_stat
+    post 'get_consumables' => :get_consumables
     get 'consumables_shop' => :consumables_shop
     get 'main_battle' => :main_battle
-    get 'get_consumables' => :get_consumables
     get 'battlefield' => :battlefield
     get 'battlefield_list' => :battlefield_list
     get 'fight' => :fight

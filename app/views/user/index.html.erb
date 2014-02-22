@@ -48,9 +48,10 @@
 	 				<ul>
 						<% @battles.first(10).reverse_each do |b| %>
 							<% if b.robot_id == current_user.robot.id %>
-								<li><%= current_user.username %> attacked 
+								<li class ="list_name">
+									<%= link_to current_user.username, show_user_path({username: current_user.username}) %>  attacked 
 									<% if b.oponent_type == "Robot" %>
-										<%= Robot.find(b.oponent_id).name %>
+										<%= link_to Robot.find(b.oponent_id).name, show_user_path({username: Robot.find(b.oponent_id).name}) %>
 										(Robot)
 									<% else %>
 										<%= Mob.find(b.oponent_id).name %>

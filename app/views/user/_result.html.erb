@@ -1,6 +1,9 @@
+<%= javascript_include_tag "colorbox" %>
+
 <div id="result">
 	<div class="span9">
-	<p class="offset2"> Result: <%=  Battle.where(:robot_id => current_user.robot.id).last.winner %> won </p>
+		<p class="offset2"> Result: <%=  Battle.where(:robot_id => current_user.robot.id).last.winner %> won </p>
+
 		<div class="recent-activity ">
 			<h4 class="section-title">Combat Log:</h4>
 			<ul>

@@ -5,6 +5,9 @@ class UserController < ApplicationController
 
  	def show 
  		@user = User.find_by_username(params[:username])
+ 		if @user == current_user 
+ 			redirect_to user_path
+ 		end
   		@battles = Battle.find_all_by_robot_id(@user.robot.id) + Battle.find_all_by_oponent_id(@user.robot.id)
  	end
 
@@ -71,19 +74,16 @@ class UserController < ApplicationController
 					current_user.resource.oil -= 2
 					current_user.resource.save
 					hit = rand((current_user.robot.stat.attack/2)..(current_user.robot.stat.attack))
-					combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
 				else 
 					if current_user.resource.electricity > 4
 						current_user.resource.electricity -= 4
 						current_user.resource.save
 						hit = rand((current_user.robot.stat.attack/2)..(current_user.robot.stat.attack))
-						combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
 					end
 				end
 				if current_user_special_attack == 3
 					if current_user_mana >= 20 
 						hit += current_user.robot.stat.strength*2
-						combat_log += "Attack_turn1 hit.special #{hit.to_s}\n"
 						current_user_mana -= 20
 					end
 					current_user_special_attack = 0
@@ -91,16 +91,26 @@ class UserController < ApplicationController
 					current_user_special_attack += 1
 				end
 				if  rand(100) <= (current_user.robot.stat.agility - 18)*0.29 + 5.14
-					hit = (hit*1.5).to_i 
-					combat_log += "Attack_turn1 hit.crit #{hit.to_s}\n"					
+					hit = (hit*1.5).to_i
+					crit = true		
 				end
 				if hit > oponent_stat.armor/2 
 					hit -= oponent_stat.armor/2
 				end
-				combat_log += "Attack_turn1 hit.reduce #{hit.to_s}\n"
 				if rand(100) <= (oponent_stat.defence/30).to_i
 					hit = 0
-					combat_log += "Attack_turn1 hit.block #{hit.to_s}\n"
+					block = true
+				end
+				if block 
+					combat_log += "#{current_user.username} missed\n"
+					block = false
+				else 
+					if crit
+						combat_log += "#{current_user.username} crit #{hit.to_s}\n"
+						crit = false
+					else 
+						combat_log += "#{current_user.username} hit #{hit.to_s}\n"
+					end
 				end
 				oponent_health -= hit
 			else 
@@ -111,19 +121,16 @@ class UserController < ApplicationController
 						u.resource.oil -= 2
 						u.resource.save
 						hit = rand((oponent_stat.attack/2)..(oponent_stat.attack))
-						combat_log += "Attack_turn2 hit.white #{hit.to_s}\n"
 					else 
 						if u.resource.electricity > 4
 							u.resource.electricity -= 4
 							u.resource.save
 							hit = rand((oponent_stat.attack/2)..(oponent_stat.attack))
-							combat_log += "Attack_turn1 hit.white #{hit.to_s}\n"
 						end
 					end
 					if oponent_special_attack == 3
 						if oponent_mana >= 20 
 							hit += oponent_stat.strength*2
-							combat_log += "Attack_turn2 hit.special #{hit.to_s}\n"
 							oponent_mana -= 20
 						end
 						oponent_special_attack = 0
@@ -132,20 +139,29 @@ class UserController < ApplicationController
 					end
 					if rand(100) <= (oponent_stat.agility - 18)*0.29 + 5.14
 						hit = (hit*1.5).to_i 
-						combat_log += "Attack_turn2 hit.crit #{hit.to_s}\n"
+						crit = true
 					end
 					if hit > current_user.robot.stat.armor/2
 						hit -= current_user.robot.stat.armor/2
 					end
-					combat_log += "Attack_turn2 hit.reduce #{hit.to_s}\n"
 					if rand(100) <= (current_user.robot.stat.defence/30).to_i
 						hit = 0 
-						combat_log += "Attack_turn2 hit.block #{hit.to_s}\n"
+						block = true
+					end
+					if block 
+						combat_log += "#{u.username} missed\n"
+							block = false
+					else 
+						if crit
+							combat_log += "#{u.username} crit #{hit.to_s}\n"
+							crit = false
+						else 
+							combat_log += "#{u.username} hit #{hit.to_s}\n"
+						end
 					end
 					current_user.robot.current_health -= hit
 				else
 					hit = rand((oponent_stat.attack/2)..(oponent_stat.attack*2/3))
-					combat_log += "Attack_turn2 hit.white #{hit.to_s}\n"
 					if oponent_special_attack == 3
 						if oponent_mana >= 20 
 							hit += oponent_stat.strength*2
@@ -158,15 +174,26 @@ class UserController < ApplicationController
 					end
 					if rand(100) <= (oponent_stat.agility - 18)*0.29 + 5.14
 						hit = (hit*1.5).to_i 
-						combat_log += "Attack_turn2 hit.crit #{hit.to_s}\n"
+						crit = true
 					end
 					if hit > current_user.robot.stat.armor/2
 						hit -= current_user.robot.stat.armor/2
 					end
-					combat_log += "Attack_turn2 hit.reduce #{hit.to_s}\n"
 					if rand(100) <= (current_user.robot.stat.defence/30).to_i
 						hit = 0 
-						combat_log += "Attack_turn2 hit.block #{hit.to_s}\n"
+						block = true
+					end
+					m = Mob.find(params[:id])
+					if block 
+						combat_log += "#{m.name} missed\n"
+						block = false
+					else 
+						if crit
+							combat_log += "#{m.name} crit #{hit.to_s}\n"
+							crit = false
+						else 
+							combat_log += "#{m.name} hit #{hit.to_s}\n"
+						end
 					end
 					current_user.robot.current_health -= hit
 				end

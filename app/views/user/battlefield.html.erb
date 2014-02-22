@@ -68,8 +68,10 @@
 				<div class="span2">
 					<div id="validation">
 					<% if @mob != nil %>
-						<% if @mob.lost != true %>						
-							<%= button_to "Attack", main_battle_path({id: @mob.id, oponent: "Mob"}), :class => 'btn btn-success', remote: true, :method => :get %>
+						<% if @mob.lost != true %>
+							<% if @mob.level == current_user.robot.level %>						
+								<%= button_to "Attack", main_battle_path({id: @mob.id, oponent: "Mob"}), :class => 'btn btn-success', remote: true, :method => :get %>
+							<% end %>
 						<% end %>
 					<% else %>
 						<% if @user != nil %>

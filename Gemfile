@@ -8,12 +8,7 @@ gem 'rails', '4.0.2'
 gem 'rails_12factor'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', :group => [:developmnet, :test]
-
-group :production do
-	gem 'thin'
-	gem 'pg'
-end
+gem 'sqlite3'
 
 group :assets do
   gem 'bootstrap-sass'

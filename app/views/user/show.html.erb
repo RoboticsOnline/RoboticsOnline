@@ -9,18 +9,18 @@
 				<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><%= link_to "Battlefield", battlefield_path %></li>
-					<li><%= link_to "Messages", user_messages_path %></li>
-					<li><%= link_to "General Shop ", user_general_shop_path %></a></li>
-					<li><%= link_to "Consumables Shop", user_consumables_shop_path %> </a></li>
-					<li><%= link_to "VipZone", user_vipzone_path %> </a></li>
-					<li><%= link_to "Search", user_search_path %> </a></li>
-					<li><%= link_to "Fight", fight_path %> </a></li>
+					<li><%= link_to "Attack", battlefield_path({username: @user.username}) %></li>
+					<li><%= link_to "Messages", messages_path %></li>
+					<li><%= link_to "General Shop ", general_shop_path %></li>
+					<li><%= link_to "Consumables Shop", consumables_shop_path %></li>
+					<li><%= link_to "VipZone", vipzone_path %></li>
+					<li><%= link_to "Search", search_path %> </li>
+					<li><%= link_to "Fight", fight_path %> </li>
 				</ul>
 			</div>
 
 			<div class="user-info">
-				<h2 class='user-name'> <%= @user.username %> </h2>
+				<h2 class='user-name'> <%= @user.username%> </h2>
 				<h4 class="user-level">Level: <%= @user.robot.level%> </h4>
 				<% if @user.robot.unused_talent_points > 0 %>
 					<div style="display: inline;">
@@ -33,56 +33,61 @@
 				<img src="/assets/user/<%= @user.picture%>" alt="">
 			</div>
 			<div class='progress-bar'>
-				<div class="progress progress-danger progress-striped active" id="health">
-					<div class="bar" style="width:<%= x = @user.robot.current_health.to_f / @user.robot.max_health.to_f * 100.0 %>%;" >
-						<%= @user.robot.current_health %>
-					</div> 
-				<small class='pull-right' style="color: black" ><%= @user.robot.max_health %></small>
-				</div>
-			</div>
+						<div class="progress progress-danger progress-striped active" id="health">
+							<div class="bar" style="width:<%= x = @user.robot.current_health.to_f / @user.robot.max_health.to_f * 100.0 %>%;" >
+								<%= @user.robot.current_health %>
+							</div> 
+						<small class='pull-right'><%= @user.robot.max_health %></small>
+						</div>
+			</div><!-- /progress-bar -->
 			<div class="stats">
 				<ul id="stats">
-					<li>
-						Attack
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Attack">Attack</p>
 						<span class="pull-right">
 							<%= @user.robot.stat.attack/2 %> - <%= @user.robot.stat.attack %> 
 						</span>
 					</li>
-					<li>
-						Strength 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Strength">Strength</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.strength %> 
 						</span>
 					</li> 
-					<li>
-						Agility 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Agility">Agility</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.agility %> 
 						</span>
 					</li>
-					<li>
-						Intelligence 
+					</li> 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Intelligence">Intelligence</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.intelligence %> 
 						</span>
+					</li>
 					</li> 
-					<li>
-						Stamina 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Stamina">Stamina</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.stamina %> 
 						</span>
+					</li>
 					</li> 
-					<li>
-						Defence 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Defence">Defence</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.defence %> 
 						</span>
+					</li>
 					</li>  
-					<li>
-						Armor 
+					<li class="stat">
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Armor">Armor</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.armor %> 
 						</span>
+					</li>
 					</li>
 				</ul>
 			</div>
@@ -104,10 +109,6 @@
 				</div><!-- /equipment -->
 				<div class="inventory span6">
 					<h4 class="section-title">Inventory</h4>
-					<div class="scrollbar pre-scrollable">
-						<div class="item">
-							<a href=""><img data-animation=false data-trigger=hover src="/assets/jet-engine.png" alt="" data-toggle="popover" data-placement="right" data-content="Attack:</br>Strength:</br>Agility:</br>Intelegence:</br>Stamina:</br>Defence:</br>Armor:"  title="Item name" data-original-title="Popover on top"></a>
-						</div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
@@ -126,30 +127,19 @@
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-					</div>
 				</div><!-- /equipment -->
 			</div>
 
 			<div class="recent-activity">
 				<h4 class="section-title">Recent Activity</h4>
 				<% if @battles != nil %>		
-	 				<ul>
+	 				<ul> 
 						<% @battles.first(10).reverse_each do |b| %>
 							<% if b.robot_id == @user.robot.id %>
-								<li><%= @user.username %> attacked 
+								<li class ="list_name">
+									<%= link_to @user.username, show_user_path({username: @user.username}) %> attacked 
 									<% if b.oponent_type == "Robot" %>
-										<%= Robot.find(b.oponent_id).name %>
+									<%= link_to Robot.find(b.oponent_id).name, show_user_path({username:Robot.find(b.oponent_id).name}) %>
 										(Robot)
 									<% else %>
 										<%= Mob.find(b.oponent_id).name %>
@@ -163,7 +153,10 @@
 									<% end %>
 								</li>
 							<% else %>
-								<li><%= @user.username %> was attacked by <%= Robot.find(b.robot_id).name %>
+								<li class="list_name">
+									<%= link_to @user.username, show_user_path({username: @user.username}) %> 
+									was attacked by 
+									<%= link_to Robot.find(b.robot_id).name, show_user_path({username: Robot.find(b.robot_id).name}) %>
 									(Robot) and 
 									<% if b.winner == @user.username %>
 										won the battle !!!
