@@ -1,0 +1,38 @@
+<table class="table" class="battles">
+	<tr>
+		<th> N: </th>
+		<th> Attacker </th>
+		<th> Deffender </th>
+		<th> Status </th>
+		<th> History </th>
+	</tr>
+	<% number = (@page - 1)*20 %>
+	<% if @battles.count >= 20 %>
+		<% count = 20 %>
+	<% else %>
+		<% count = @battles.count %>
+	<% end %>
+		<% @battles.first(count).each do |b| %>
+			<tr>
+				<td> <%= number += 1 %> </td>
+				<td class="list_name"> 
+					<%= link_to Robot.find(b.robot_id).name, show_user_path({username: Robot.find(b.robot_id).name}) %>
+				</td>
+				<td class="list_name"> 
+					<%= link_to Robot.find(b.oponent_id).name, show_user_path({username: Robot.find(b.oponent_id).name}) %>
+				</td>
+				<% if Robot.find(b.robot_id).name == b.winner %>
+					<td> Won the Battle </td>
+				<% else %>	
+					<td> Lost the Battle </td>
+				<% end %>
+					
+				<td class="history"> <%= link_to "View", show_battle_path({id: b.id}) %> </td>
+			</tr>	
+		<% end %>
+</table>
+<div class="page_number" id="page_number">
+
+	<%= render'page_number'%>
+
+</div>

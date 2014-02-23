@@ -7,7 +7,6 @@ RoboticsOnline::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'robotics_online#index'
-  get 'ranklist' => 'ranklist#index', :as => :ranklist
   get 'battles' => 'battles#index', :as => :battles
   get 'guilds' => 'guilds#index', :as => :guilds
   get 'friends' => 'friends#index', :as => :friends
@@ -17,9 +16,11 @@ RoboticsOnline::Application.routes.draw do
   get 'game_rules' => 'game_rules#index', :as => :game_rules
   
   
-
+  get 'ranklist' => 'ranklist#index', :as => :ranklist
+  get 'ranklist/page' => 'ranklist#page', :as => 'ranklist_page'
   get 'user' => 'user#index', :as => :user
-  get '/battle/:id' => 'battles#show', as: 'show_battle'
+  get '/battle/show/:id' => 'battles#show', as: 'show_battle'
+  get '/battle/page' => 'battles#page', :as => 'battle_page'
   get '/profile/:username' => 'user#show', as: 'show_user'
   get '/battlefield/user/:username' => 'user#battlefield', as: 'battlefield_user'
   get '/battlefield/mob/:id' => 'user#battlefield', as: 'battlefield_mob'

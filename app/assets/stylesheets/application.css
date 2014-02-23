@@ -387,7 +387,7 @@ ul.main-menu li {
 }
 
 /* but make the span that holds the comment box larger */
-span.fb_edge_comment_widget.fb_iframe_widget iframe
+.fb_iframe_widget iframe
 {
     width:401px !important;
 }
@@ -395,6 +395,10 @@ span.fb_edge_comment_widget.fb_iframe_widget iframe
 .comercial {
 	padding-top: 10px;
 	padding-left: 385px; /* trqbva da e v % */
+}
+
+#main .user-name a {
+	color: white;	
 }
 
 #sign_in {	
@@ -406,6 +410,19 @@ span.fb_edge_comment_widget.fb_iframe_widget iframe
 
 .stat a:hover {
 	color: white;
+}
+
+#validation {
+	margin: 200px auto;
+	display: block;
+}
+
+#validation input{
+	margin-left: 50px;
+}
+
+.versus {
+	background: url("/assets/vs-bg.png") no-repeat center center;
 }
 
 #main-content .progress-bar small {

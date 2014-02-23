@@ -30,12 +30,12 @@
 		<img src="/assets/user/<%= current_user.picture%>" alt="">
 	</div>
 	<div class='progress-bar'>
-				<div class="progress progress-danger progress-striped active" id="health">
-					<div class="bar" style="width:<%= x = current_user.robot.current_health.to_f / current_user.robot.max_health.to_f * 100.0 %>%;" >
-						<%= current_user.robot.current_health %>
-					</div> 
-				<small class='pull-right'><%= current_user.robot.max_health %></small>
-				</div>
+		<div class="progress progress-danger progress-striped active" id="health">
+			<div class="bar" style="width:<%= x = current_user.robot.current_health.to_f / current_user.robot.max_health.to_f * 100.0 %>%;" >
+				<%= current_user.robot.current_health %>
+			</div> 
+		<small class='pull-right'><%= current_user.robot.max_health %></small>
+		</div>
 	</div><!-- /progress-bar -->
 	<div class="stats">
 

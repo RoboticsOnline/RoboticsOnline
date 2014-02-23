@@ -1,0 +1,7 @@
+<% if (@page == 1  &&  @battles.count > 20 ) || (@page != 1) %>
+	<div align="center" id="page" class="list_name">Pages:   
+		<% for i in 1..Battle.where(:oponent_type => "Robot").count/20 + 1 %>
+			<%= link_to "#{i}", battle_page_path({id: "#{i}"}), :method => :get %> 
+		<% end %>
+	</div>
+<% end %>

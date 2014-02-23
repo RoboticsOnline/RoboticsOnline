@@ -6,9 +6,37 @@
 	max-height: 255px;
 }
 
-#main img {
+#test {
 	width: 150px;
 	height: 150px;
+}
+
+#main img {
+	width: 100%;
+	height: 150px;
+}
+
+#main .progress {
+	margin-top: 20px
+}
+
+#main .stats ul {
+	margin:0;
+	padding: 0;
+}
+
+#main .stats li {
+	list-style: none;
+	margin: 0;
+}
+
+#main .user-name {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+#main .user-name a:hover {
+	text-decoration: none	
 }
 
 #history {
@@ -46,3 +74,5 @@
 	color: white;
 	text-decoration: none;
 }
+
+

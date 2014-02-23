@@ -1,0 +1,28 @@
+<div id="main-content" class="container">
+	<div class="row">
+		<div class="siderbar">
+
+			<%= render'sidebar'%>
+
+		</div>
+		<div id="main" class="main-content span9">
+			<div class="row">
+				<div id="consumables" class="offset1">
+					<% if current_user.resource.gold >= 30 %>
+						<% if current_user.robot.current_health < current_user.robot.max_health %>
+							<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', remote: true %> - 30 gold
+						<% else %>
+							<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', :disabled => true %> - You are on full Health
+						<% end %>
+						<%= button_to "Gain 100 Electricity", get_consumables_path({consumable: "Electricity"}), :class => 'btn btn-success', remote: true %> - 30 gold
+						<%= button_to "Gain 50 Oil", get_consumables_path({consumable: "Oil"}), :class => 'btn btn-success', remote: true %> - 30 gold
+					<% else %>
+						<%= button_to "Full Health", get_consumables_path({consumable: "Health"}), :class => 'btn btn-success', :disabled => true %> - not enough gold 
+						<%= button_to "Gain 100 Electricity", get_consumables_path({consumable: "Electricity"}), :class => 'btn btn-success', :disabled => true %> - not enough gold 
+						<%= button_to "Gain 50 Oil", get_consumables_path({consumable: "Oil"}), :class => 'btn btn-success', :disabled => true %> - not enough gold 
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

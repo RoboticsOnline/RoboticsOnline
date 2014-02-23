@@ -268,7 +268,7 @@ class UserController < ApplicationController
 			winner.robot.current_experience = gap
 	    
 		    m1 = Mob.where(:robot_id => winner.robot.id, :name => "Roshan").last
-		    m1.level += 1
+		    m1.level += current_user.robot.level
 		    m1.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points) - 2*winner.robot.level
 		    m1.picture = (m1.picture.to_i + 6).to_s
 		    m1.lost = false
@@ -276,7 +276,7 @@ class UserController < ApplicationController
 		    m1.save
 
 		    m2 = Mob.where(:robot_id => winner.robot.id, :name => "Balanar").last
-		    m2.level += 1
+		    m2.level = current_user.robot.level
 		    m2.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points) - 2*winner.robot.level
 		    m2.picture = (m2.picture.to_i + 6).to_s
 		    m2.lost = false
@@ -284,7 +284,7 @@ class UserController < ApplicationController
 		    inc_mob_stats(m2)
 		    
 		    m3 = Mob.where(:robot_id => winner.robot.id, :name => "Zefs").last
-		    m3.level += 1
+		    m3.level += current_user.robot.level
 		    m3.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points)
 		    m3.picture = (m3.picture.to_i + 6).to_s 
 		    m3.lost = false
@@ -292,7 +292,7 @@ class UserController < ApplicationController
 		    inc_mob_stats(m3)
 		    
 		    m4 = Mob.where(:robot_id => winner.robot.id, :name => "Riki").last
-		    m4.level += 1
+		    m4.level += current_user.robot.level
 		    m4.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points)
 		    m4.picture = (m4.picture.to_i + 6).to_s 
 		    m4.lost = false
@@ -300,7 +300,7 @@ class UserController < ApplicationController
 		    inc_mob_stats(m4)
 		    
 		    m5 = Mob.where(:robot_id => winner.robot.id, :name => "Axe").last
-		    m5.level += 1
+		    m5.level += current_user.robot.level
 		    m5.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points) + (1.5*winner.robot.level).to_i
 		    m5.picture = (m5.picture.to_i + 6).to_s 
 		    m5.lost = false
@@ -308,7 +308,7 @@ class UserController < ApplicationController
 		    inc_mob_stats(m5)
 		    
 		    m6 = Mob.where(:robot_id => winner.robot.id, :name => "Sniper").last
-		    m6.level += 1
+		    m6.level += current_user.robot.level
 		    m6.talent_points += (winner.robot.unused_talent_points + winner.robot.used_talent_points) + 2*winner.robot.level
 		    m6.picture = (m6.picture.to_i + 6).to_s
 		    m6.lost = false

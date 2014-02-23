@@ -1,3 +1,5 @@
 var parent = $('#ranklist').parent();
+var parent2 = $('#page_number').parent();
 $('#ranklist').remove();
+$('#page_number').remove();
 parent.prepend("<%=j render 'ranklist' %>");

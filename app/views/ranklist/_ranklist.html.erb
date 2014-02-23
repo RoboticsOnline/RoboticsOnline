@@ -1,13 +1,21 @@
 <table class="table" id="ranklist">
 	<tr>
+		<th> Rank </th>
 		<th class="list_name"> <%= link_to "Username", sort_by_path({by: "Username"}), remote: true, :method => :get %> </th>
 		<th class="list_name"> <%= link_to "Level", sort_by_path({by: "Level"}), remote: true, :method => :get %> </th>
 		<th class="list_name"> <%= link_to "Battles", sort_by_path({by: "Battles"}), remote: true, :method => :get %> </th>
 		<th class="list_name"> <%= link_to "Battles Won", sort_by_path({by: "Battles_Won"}), remote: true, :method => :get %> </th>
 		<th class="list_name"> <%= link_to "Battles Lost", sort_by_path({by: "Battles_Lost"}), remote: true, :method => :get %> </th>
 	</tr>
-	<% @users.each do |u| %>
+	<% rank = (@page - 1)*20 %>
+	<% if @users.count >= 20 %>
+		<% count = 20 %>
+	<% else %>
+		<% count = @users.count %>
+	<% end %>
+	<% @users.first(count).each do |u| %>
 		<tr>
+			<td> <%= rank += 1 %> </td>
 			<td class="list_name"> 
 				<%= link_to u.username, show_user_path({username: u.username}) %>
 			</td>
@@ -30,4 +38,10 @@
 			<td> <%= @lost %></td>	
 		</tr>	
 	<% end %>
+	
 </table>
+<div class="page_number" id="page_number">
+
+	<%= render'page_number'%>
+
+</div>

@@ -1,22 +1,33 @@
-<div id="main" class="conteiner">
+<div id="main" class="container">
 	<div class="row">
 		<div class="span2 offset3">
-			<div class="list_name">
+			<div class="user-name">
 				<%= link_to User.find(Robot.find(@battle.robot_id).user_id).username, show_user_path({username: User.find(Robot.find(@battle.robot_id).user_id).username}) %>
 			</div>
 			<img src="/assets/user/profile-img.png"/>
 		</div>
-		<div class="span2 offset2">
-			<div class="list_name">
+		<div class="span2 versus">
+			<div id="validation">
+
+			</div>
+		</div>
+		<div class="span2">
+			<div class="user-name">
 				<%= link_to User.find(Robot.find(@battle.oponent_id).user_id).username, show_user_path({username: User.find(Robot.find(@battle.oponent_id).user_id).username}) %>
 			</div>
 			<img src="/assets/user/profile-img.png"/>
 		</div>
-		<div class="span3 offset5">
-			<p> Result: <%=  @battle.winner %> won </p>
-			<% @battle.combat_log.split("\n").each do |line| %>
-				<li> <%= line %> </li>
-			<% end %>
+		<div id="combat_log" class="main-content span9">
+			<div class="row">
+				<div class="offset5"> Result: <%=  @battle.winner %> won </div>
+				<div class="recent-activity offset4">
+					<h4 class="section-title">Combat Log:</h4>
+					<ul>
+						<% @battle.combat_log.split("\n").each do |line| %>
+							<li> <%= line %> </li>
+						<% end %>
+				</div>
+			</div>
 		</div>
 	</div><!-- /row -->
 </div><!-- /container -->

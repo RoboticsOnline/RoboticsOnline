@@ -9,7 +9,7 @@
 		<div id="main" class="main-content span9">
 			<div class="row">
 				<div class="span2 offset1">
-					<div class="list_name">
+					<div class="user-name">
 						<%= link_to current_user.username, show_user_path({username: current_user.username})%>
 					</div>
 					<img src="/assets/user/profile-img.png"/>
@@ -65,11 +65,11 @@
 						</ul>
 					</div>
 				</div>
-				<div class="span2">
+				<div class="span2 versus">
 					<div id="validation">
 					<% if @mob != nil %>
 						<% if @mob.lost != true %>
-							<% if @mob.level == current_user.robot.level %>						
+							<% if current_user.robot.mobs.include?(@mob) %>						
 								<%= button_to "Attack", main_battle_path({id: @mob.id, oponent: "Mob"}), :class => 'btn btn-success', remote: true, :method => :get %>
 							<% end %>
 						<% end %>
@@ -101,7 +101,7 @@
 								Find someone 	
 								<%= link_to '<img src="/assets/Question_mark.PNG"/>'.html_safe, battlefield_list_path %>
 							<% else %>
-								<div class="list_name">
+								<div class="user-name">
 									<%= link_to @user.username, show_user_path({username: @user.username})%>
 								</div>
 								<img src="/assets/user/profile-img.png"/>
@@ -158,7 +158,9 @@
 								</div>
 							<% end %>							
 						<% else %>	
-								<%= @mob.name%>						
+								<div class="user-name">
+									<%= @mob.name%>	
+								</div>				
 								<img src="/assets/mob/<%= @mob.picture %>.jpg"/>
 								<div class="progress progress-danger progress-striped active" id="health">
 									<div class="bar" style="width: 100%;" ><%= (@mob.stat.stamina - 33)*30 + 1000 %>
