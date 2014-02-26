@@ -13,6 +13,16 @@
 		<link rel="stylesheet" href="/assets/font-awesome.min.css">
 	</head>
 	<body>
+		<div id="fb-root"></div>
+			<script>
+				(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
 		<header id="header">
 
 			<div id="nav" class='navbar navbar-inverse navbar-fixed-top'>
@@ -109,11 +119,12 @@
 				<p>Designed and built with all the love in the world by @mdo and @fat.</p>
 				<p>Code licensed under Apache License v2.0, documentation under CC BY 3.0.</p>
 			</div>
-			<div class="comercial">
-				<!-- Place this tag where you want the +1 button to render. -->
-				<div class="g-plusone" data-size="medium" data-annotation="none"></div>
-				<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en">Tweet</a>
-				<div class="fb-like" data-show-faces="false" data-share="false" data-ref="none"  data-href="https://www.facebook.com/roboticsonline" data-layout="standart" data-action="like" data-show-faces="true" data-share="true"></div>
+			<div class="share">
+				<ul>
+					<li><div class="g-plusone" data-size="medium" data-annotation="none"></div></li>
+					<li><a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en">Tweet</a></li>
+					<li><div class="fb-like" data-href="https://www.facebook.com/roboticsonline" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div></li>
+				</ul>
 			</div>
 		</div>
 

@@ -27,22 +27,23 @@ class UserController < ApplicationController
 	end
 
 	def get_consumables
-		if params[:consumable] == "Electricity"
-			current_user.resource.electricity += 100
-		else 
-			if params[:consumable] == "Oil"
-				current_user.resource.oil += 50
-			else
-				current_user.robot.current_health = current_user.robot.max_health
-				current_user.robot.save
+		if current_user.resource.gold >= 30 
+			if params[:consumable] == "Electricity"
+				current_user.resource.electricity += 100
+			else 
+				if params[:consumable] == "Oil"
+					current_user.resource.oil += 50
+				else
+					current_user.robot.current_health = current_user.robot.max_health
+					current_user.robot.save
+				end
 			end
-		end
-		current_user.resource.gold -= 30
-		current_user.resource.save
-
-	
-		respond_to do |format|
-			format.js
+			current_user.resource.gold -= 30
+			current_user.resource.save
+			
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 
@@ -106,10 +107,10 @@ class UserController < ApplicationController
 					block = false
 				else 
 					if crit
-						combat_log += "#{current_user.username} crit #{hit.to_s}\n"
+						combat_log += "#{current_user.username} CRIT with un amount of: #{hit.to_s} damage\n"
 						crit = false
 					else 
-						combat_log += "#{current_user.username} hit #{hit.to_s}\n"
+						combat_log += "#{current_user.username} whitehited with un amount of #{hit.to_s} damage\n"
 					end
 				end
 				oponent_health -= hit
@@ -153,10 +154,10 @@ class UserController < ApplicationController
 							block = false
 					else 
 						if crit
-							combat_log += "#{u.username} crit #{hit.to_s}\n"
+							combat_log += "#{u.username} CRIT with un amount of: #{hit.to_s} damage\n"
 							crit = false
 						else 
-							combat_log += "#{u.username} hit #{hit.to_s}\n"
+							combat_log += "#{u.username} whitehited with un amount of #{hit.to_s} damage\n"
 						end
 					end
 					current_user.robot.current_health -= hit
@@ -189,10 +190,10 @@ class UserController < ApplicationController
 						block = false
 					else 
 						if crit
-							combat_log += "#{m.name} crit #{hit.to_s}\n"
+							combat_log += "#{m.name} CRIT with un amount of: #{hit.to_s} damage\n"
 							crit = false
 						else 
-							combat_log += "#{m.name} hit #{hit.to_s}\n"
+							combat_log += "#{m.name} whitehited with un amount of #{hit.to_s} damage\n"
 						end
 					end
 					current_user.robot.current_health -= hit
