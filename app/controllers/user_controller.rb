@@ -417,4 +417,26 @@ class UserController < ApplicationController
 		@fight_mob = Mob.find_all_by_robot_id(current_user.robot.id)
 
 	end 
+	
+	def vipzone
+
+	end
+
+	def success_transaction1
+		user_resource = current_user.resource
+		user_resource.cristals += 10
+		user_resource.save
+	end
+
+	def success_transaction2
+		user_resource = current_user.resource
+		user_resource.cristals += 100
+		user_resource.save
+	end
+
+	def success_transaction3
+		user_resource = current_user.resource
+		user_resource.cristals += 500
+		user_resource.save
+	end
 end
