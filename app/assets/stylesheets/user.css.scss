@@ -75,4 +75,30 @@
 	text-decoration: none;
 }
 
+.link_to_vipzone {
+	color:#FFFFFF; 
+	text-decoration: none;	
+}
+h1 {
+	text-align: center
+}
+#vipzone tr td a{
+	color:#FFFFFF;
+	text-decoration: underline;
+}
+#vipzone tr td a:hover {
+	color:#A4A4A4;
+}
 
+.link_to_vipzone :hover {
+	color:#A4A4A4; 
+	text-decoration: none;	
+}
+#change_pic {
+	width: 300px;
+	height: 250px;
+	margin-top: 30px;
+}
+#change_pic button_to {
+	margin-top: 30px;
+}

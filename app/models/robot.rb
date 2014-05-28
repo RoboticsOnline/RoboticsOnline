@@ -6,6 +6,7 @@ class Robot < ActiveRecord::Base
 
   belongs_to :user
   has_one :stat, :as => :statable
+  has_many :pictures, :as => :pictureable
   has_many :battles, :as => :oponent
   has_many :mobs
 

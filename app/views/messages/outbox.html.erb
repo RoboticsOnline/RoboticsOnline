@@ -1,0 +1,40 @@
+<div id="main-content" class="container">
+  <div class="row">
+
+    <div class="siderbar">
+
+      <%= render'sidebar'%>
+
+    </div>
+
+    <div id="main" class="main-content span9">
+        <div class="row">
+          <div class="span7 offset1" >
+            <h1>Outbox</h1>
+            <table class='table'>
+              <tr>
+                <th>Title</th>
+                <th>Recipient</th>
+                <th>Date</th>
+              </tr>
+              
+              <% @messages.each do |message| %>
+                <% if message.from_user == current_user.username %>
+                  <tr>
+                     <td class = "link_to_message"><%= link_to message.title, show_outbox_path({id: message.id})%></td> 
+                     <td><%= message.to_user %></td>
+                     <td><%= message.published_at %></td> 
+                  </tr>
+                <% end %>
+              <% end %>
+
+            </table>
+
+          <br>
+
+            <%= link_to 'Back', messages_path, :class => 'btn btn-success'%>
+        </div>
+      </div>
+    </div>          
+  </div>
+</div>

@@ -1,48 +1,72 @@
 <div id="main-content" class="container">
 	<div class="row">
+		<div class="siderbar">
 
-		<aside id="sidebar" class="span3">
+			<%= render'sidebar'%>
 
-			<div class="btn-group wide-fat">
-				<button class="btn btn-large">Dashboard</button>
-				<button class="btn btn-large btn-primary dropdown-toggle" data-toggle="dropdown">
-				<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><%= link_to "Battlefield", user_battlefield_path %></li>
-					<li><%= link_to "Messages", user_messages_path %></li>
-					<li><%= link_to "General Shop ", user_general_shop_path %></a></li>
-					<li><%= link_to "Consumables Shop", user_consumables_shop_path %> </a></li>
-					<li><%= link_to "VipZone", user_vipzone_path %> </a></li>
-					<li><%= link_to "Search", user_search_path %> </a></li>
-					<li><%= link_to "Fight", user_fight_path %> </a></li>
-				</ul>
-			</div>
+		</div>
+		<div id="main" class="main-content span9">
+			<div class="row">
+				<div id="vipzone" class="span7 offset1">
+					<h1>Vipzone</h1>
+					<table class='table'>
+						<tr>
+							<th>Amount of crystals</th>
+							<th>Price</th>
+							<th>Available payment methods</th>
+							<th>Pay with</th>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>5.00 BGN</td>
+							<td><a href="https://www.epay.bg/en/" target="_blank">ePay</a></td>
+							<td><form action="https://www.epay.bg/" method=post>
+									<input type=hidden name=PAGE value="paylogin">
+									<input type=hidden name=MIN value="3011474174">
+									<input type=hidden name=INVOICE value="">
+									<input type=hidden name=TOTAL value="5.00">
+									<input type=hidden name=DESCR value="You will receive 10 crystals">
+									<input type=hidden name=URL_OK value="http://www.robotics-online.org/user/success_transaction1">
+									<input type=hidden name=URL_CANCEL value="http://www.robotics-online.org/user/canceled_transaction1">
+									<input type=image src="http://online.datamax.bg/epaynow/b03.gif" name=BUTTON:EPAYNOW value="" alt="Pay" title="Pay">
+								</form>
+							</td>	
 
-			<div class="user-info">
-				<h2 class='user-name'> <%= current_user.username%> </h2>
-				<h4 class="user-level">Level: <%= current_user.robot.level%> </h4>
-				<% if current_user.robot.unused_talent_points > 0 %>
-					<span class="label label-warning"> +<%= current_user.robot.unused_talent_points%> </span>
-				<% end %>
-			</div>
+						</tr>
+							<td>50</td>
+							<td>10.00 BGN</td>
+							<td><a href="https://www.epay.bg/en/" target="_blank">ePay</a></td>
+							<td><form action="https://www.epay.bg/" method=post>
+									<input type=hidden name=PAGE value="paylogin">
+									<input type=hidden name=MIN value="3011474174">
+									<input type=hidden name=INVOICE value="">
+									<input type=hidden name=TOTAL value="10.00">
+									<input type=hidden name=DESCR value="You will receive 50 crystals">
+									<input type=hidden name=URL_OK value="http://www.robotics-online.org/user/success_transaction2">
+									<input type=hidden name=URL_CANCEL value="http://www.robotics-online.org/user/user/canceled_transaction2">
+									<input type=image src="http://online.datamax.bg/epaynow/a08.gif" name=BUTTON:EPAYNOW value="" alt="Pay" title="Pay">
+								</form>
+							</td>
 
-			<div class="profile-image">
-				<img src="/assets/profile-img.png" alt="">
-			</div>
-
-			<div class="stats">
-				<ul>
-					<li>Attack <span class="pull-right"><%= current_user.robot.stat.attack/2 %> - <%= current_user.robot.stat.attack %> <i class="fa fa-plus-circle disabled"></i></span></li>
-					<li>Strength <span class="pull-right"> <%= current_user.robot.stat.strength %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Agility <span class="pull-right"> <%= current_user.robot.stat.agility %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Intelligence <span class="pull-right"> <%= current_user.robot.stat.intelligence %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Stamina <span class="pull-right"> <%= current_user.robot.stat.stamina %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Defence <span class="pull-right"> <%= current_user.robot.stat.defence %> <i class="fa fa-plus-circle"></i></span></li>
-					<li>Armor <span class="pull-right"> <%= current_user.robot.stat.armor %> <i class="fa fa-plus-circle"></i></span></li>
-				</ul>
-			</div><!-- /stats1 -->
-
-		</aside><!-- /sidebar -->
+						<tr>
+							<td>100</td>
+							<td>18.00 BGN</td>
+							<td><a href="https://www.epay.bg/en/" target="_blank">ePay</a></td>
+							<td><form action="https://www.epay.bg/" method=post>
+									<input type=hidden name=PAGE value="paylogin">
+									<input type=hidden name=MIN value="3011474174">
+									<input type=hidden name=INVOICE value="">
+									<input type=hidden name=TOTAL value="18.00">
+									<input type=hidden name=DESCR value="You will receive 100 crystals">
+									<input type=hidden name=URL_OK value="http://www.robotics-online.org/user/success_transaction3">
+									<input type=hidden name=URL_CANCEL value="http://www.robotics-online.org/user/canceled_transaction3">
+									<input type=image src="http://online.datamax.bg/epaynow/b03.gif" name=BUTTON:EPAYNOW value="" alt="Pay" title="Pay">
+								</form>
+							</td>
+						</tr>
+					</table>
+				</div>		
+			</div><!--row-->
+		</div>
 	</div>
 </div>

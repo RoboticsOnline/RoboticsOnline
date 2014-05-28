@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219011601) do
+ActiveRecord::Schema.define(version: 20140527235022) do
+
+  create_table "admins", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "permission"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bann_lists", force: true do |t|
+    t.integer "user_id"
+  end
 
   create_table "battles", force: true do |t|
     t.string  "winner"
@@ -21,13 +32,20 @@ ActiveRecord::Schema.define(version: 20140219011601) do
     t.string  "combat_log"
   end
 
+  create_table "items", force: true do |t|
+    t.string  "name"
+    t.integer "price"
+  end
+
   create_table "messages", force: true do |t|
-    t.integer "from_id"
-    t.integer "to_id"
-    t.string  "content"
-    t.boolean "unread",    default: true
-    t.time    "time_sent"
-    t.integer "user_id"
+    t.string   "from_user"
+    t.string   "to_user"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "published_at"
+    t.boolean  "unread"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "mobs", force: true do |t|
@@ -37,6 +55,16 @@ ActiveRecord::Schema.define(version: 20140219011601) do
     t.integer "robot_id"
     t.string  "picture"
     t.boolean "lost",          default: false
+  end
+
+  create_table "pictures", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "resources", force: true do |t|
@@ -87,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140219011601) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture",                default: "profile-img.png"
+    t.datetime "last_request_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

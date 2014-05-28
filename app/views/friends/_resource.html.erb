@@ -1,10 +1,11 @@
-<ul class="nav pull-right" id="resource">
+<ul class="nav pull-right" id="resource">	
+	<% new_message_counter = Message.where(:to_user => current_user.username).where(:unread => true).count %>
 	<li class="disabled"><a href=""><i class='fa fa-ticket -o'></i> <%= current_user.resource.gold%> </a></li>
 	<li class="divider-vertical"></li>
 	<li class="disabled"><a href=""><i class='fa fa-bolt'></i> <%= current_user.resource.electricity%> </a></li>
 	<li class="divider-vertical"></li>
 	<li class="disabled"><a href=""><i class='fa fa-tint'></i> <%= current_user.resource.oil%></a></li>
 	<li class="divider-vertical"></li>
-	<li class="disabled"><a href=""><i class='fa fa-envelope-o'></i> 300</a></li>
+	<li class="disabled"><a href="/messages"><i class='fa fa-envelope-o'>  <%= Message.where(:to_user => current_user.username).where(:unread => true).count %></i></a></li>	
 	<li class="disabled gem"><a href=""><i class='fa fa-trophy'></i> <%= current_user.resource.cristals%></a></li>
 </ul><!-- /nav -->

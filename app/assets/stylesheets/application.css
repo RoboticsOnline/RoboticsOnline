@@ -29,6 +29,9 @@ body {
 	background-color: none;
 }
 
+#main-content .countainer .row{
+	min-height:100px;
+}
 .wide-fat { width: 100%; }
 
 /**

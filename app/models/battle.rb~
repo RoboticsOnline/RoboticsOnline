@@ -1,8 +1,0 @@
-class Battle < ActiveRecord::Base
-  attr_accessible :attacker_id, :deffender_id, :time_of_battle,
-				:won_goods, :result_of_battle
-  # attr_accessible :title, :body
-
-  belongs_to :robot
-
-end

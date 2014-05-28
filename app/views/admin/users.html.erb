@@ -1,0 +1,51 @@
+<div id="main-content" class="container">
+  <div class="row">
+
+    	<div id="main" class="main-content span9 offset1">
+      		<div class="row">
+      			<table class="table" id="ranklist" style="margin-left: auto; margin-right: auto">
+					<tr>
+						<th> N: </th>
+						<th class="list_name">Username</th>
+						<th class="list_name">Level</th>
+						<th class="list_name">Battles</th>
+						<th class="list_name">Battles Won</th>
+						<th class="list_name">Battles Lost</th>
+						<th class="list_name">Actions</th>
+					</tr>
+					<% rank = 0 %>
+					<% @users.each do |u| %>
+						<tr>
+							<td> <%= rank += 1 %> </td>
+							<td class="list_name"> 
+								<%= link_to u.username, show_user_path({username: u.username}) %>
+							</td>
+							<td> 
+								<%= u.robot.level %>
+							</td>
+							<% b = Battle.where(:robot_id => u.robot.id) + Battle.where(:oponent_id => u.robot.id)
+									@wins = 0
+									@lost = 0
+									b.each do |f|
+										if f.winner == u.username
+											@wins += 1
+										else 
+											@lost += 1
+										end 
+									end
+								%>
+							<td> <%= @wins + @lost %></td>
+							<td> <%= @wins %></td>
+							<td> <%= @lost %></td>
+							<td> 
+								<div>
+									<%= render'action'%>
+								</div>
+							</td>		
+						</tr>	
+					<% end %>
+				</table>
+  			</div>
+		</div>
+  </div>
+</div>

@@ -16,9 +16,13 @@ class RanklistController < ApplicationController
   		when "Username"
   			@users = @first_state_users.sort_by {|obj| obj.username}
   		when "Battles"
-  			@users = @first_state_users.sort_by {|obj|  Battle.where(:robot_id => obj.robot.id).count + Battle.where(:oponent_id => obj.robot.id).count}.reverse!
+  			@users = @first_state_users.sort_by {|obj|  
+				Battle.where(:robot_id => obj.robot.id).count + Battle.where(:oponent_id => obj.robot.id).count
+			}.reverse!
   		when "Battles_Won"
-  			@users = @first_state_users.sort_by {|obj|  Battle.find_all_by_winner(obj.username).count}.reverse!
+  			@users = @first_state_users.sort_by {|obj|  
+				Battle.find_all_by_winner(obj.username).count
+			}.reverse!
   		when "Battles_Lost"
   			@users = @first_state_users.sort_by {|obj|  
   				@battles = Battle.where(:robot_id => obj.robot.id) + Battle.where(:oponent_id => obj.robot.id)
@@ -28,7 +32,7 @@ class RanklistController < ApplicationController
   						lost += 1
   					end
   				end
-          lost
+				lost
   			}.reverse!
   	end
     
@@ -50,9 +54,11 @@ class RanklistController < ApplicationController
             when "Username"
                 @second_state_users = @first_state_users.sort_by {|obj| obj.username}
             when "Battles"
-                @second_state_users = @first_state_users.sort_by {|obj|  Battle.where(:robot_id => obj.robot.id).count + Battle.where(:oponent_id => obj.robot.id).count}.reverse!
+                @second_state_users = @first_state_users.sort_by {|obj| 
+					Battle.where(:robot_id => obj.robot.id).count + Battle.where(:oponent_id => obj.robot.id).count
+				}.reverse!
             when "Battles_Won"
-                @second_state_users = @first_state_users.sort_by {|obj|  Battle.find_all_by_winner(obj.username).count}.reverse!
+                @second_state_users = @first_state_users.sort_by {|obj| Battle.find_all_by_winner(obj.username).count}.reverse!
             when "Battles_Lost"
                 @second_state_users = @first_state_users.sort_by {|obj|  
                     @battles = Battle.where(:robot_id => obj.robot.id) + Battle.where(:oponent_id => obj.robot.id)

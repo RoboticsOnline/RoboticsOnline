@@ -1,0 +1,56 @@
+<div id="main-content" class="container">
+  <div class="row">
+    <div class="siderbar">
+      <%= render'sidebar'%>
+    </div> <!-- sidebar -->
+
+    <div id="main" class="main-content span9">
+        <div class="row">
+          <div class="span7 offset1" >
+            <h1>Inbox</h1>
+
+            <table class='table'>
+              <tr>
+                <th>Title</th>
+                <th>Sender</th>
+                <th>Date</th>
+              </tr>
+
+
+                <% if @messages.count >= 2 %>
+                  <% count = 2 %>
+                <% else %>
+                  <% count = @messages.count %>
+                <% end %>
+               
+              <% @messages.first(count).each do |message| %>
+                <% if message.to_user == current_user.username %>
+                  <tr <% if message.unread == true %>
+                       bgcolor="#728C00" 
+                       <% else %> 
+                       <% end %>
+                       >                    
+                     <td class = "link_to_message"><%= link_to message.title, show_inbox_path({id: message.id})  %></td> 
+                     <td><%= message.from_user %></td>
+                     <td><%= message.published_at %></td> 
+                  </tr>
+                <% end %>
+              <% end %>
+
+            </table>
+
+            <% if (@page == 1  &&  @messages.count > 2 ) || (@page != 1) %>
+              <div align="center" id="page" class="list_name">Pages:   
+                <% for i in 1..Message.all.count/2 + 1 %>
+                  <%= link_to "#{i}", messages_path({id: "#{i}"}), :method => :get %> 
+                <% end %>
+              </div>
+            <% end %>
+
+      			<br/>
+       			<%= link_to 'Back', messages_path, :class => 'btn btn-success'%>
+          </div>
+      	</div> <!--row-->
+    </div> <!-- main-->         
+  </div>
+</div>

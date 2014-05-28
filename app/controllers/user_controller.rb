@@ -1,6 +1,10 @@
 class UserController < ApplicationController
   	def index
-  		@battles = Battle.find_all_by_robot_id(current_user.robot.id) + Battle.find_all_by_oponent_id(current_user.robot.id)
+  		if current_user == nil
+  			redirect_to root_path
+  		else
+  			@battles = Battle.find_all_by_robot_id(current_user.robot.id) + Battle.find_all_by_oponent_id(current_user.robot.id)
+  		end
  	end
 
  	def show 
@@ -15,9 +19,7 @@ class UserController < ApplicationController
 		#tuk shte ima 2 snimki 1 vs 2 kato v tetradkata 
 		#kato ako nqma nishto shte ima kartinka s "?" i pri klik shte te prehvarlq vav fight
 		if params[:id].nil?
-			if params[:username].nil?
-				
-			else
+			if not params[:username].nil?
 				@user = User.find_by_username(params[:username])
 			end
 		else 
@@ -216,21 +218,28 @@ class UserController < ApplicationController
 		
 		if current_user.robot.current_health > oponent_health
 			if params[:oponent] == "Mob"
-				Battle.create(:winner => current_user.username, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
+				Battle.create(:winner => current_user.username, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent],
+				:robot_id => current_user.robot.id, :combat_log => combat_log)
 				m = Mob.find(params[:id]) 
 				m.lost = true
 				m.save
 				rewarding(current_user, current_user.robot.max_experience/7, current_user.robot.max_experience/7 - current_user.robot.level)
 			else 
-				Battle.create(:winner => current_user.username, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
-				rewarding(current_user, rand(current_user.robot.max_experience/7..current_user.robot.max_experience/7 + current_user.robot.level), current_user.robot.max_experience/7 + current_user.robot.level)
+				Battle.create(:winner => current_user.username, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], 
+				:robot_id => current_user.robot.id, :combat_log => combat_log)
+				rewarding(current_user, rand(current_user.robot.max_experience/7..current_user.robot.max_experience/7 + current_user.robot.level), 
+				current_user.robot.max_experience/7 + current_user.robot.level)
 			end
 		else 
 			if params[:oponent] == "Robot"
-				Battle.create(:winner => Robot.find(params[:id]).name, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)
-				rewarding(User.find(Robot.find(params[:id]).user_id), User.find(Robot.find(params[:id]).user_id).robot.max_experience + (current_user.robot.level - User.find(Robot.find(params[:id]).user_id).robot.level), User.find(Robot.find(params[:id]).user_id).robot.max_experience/7 + User.find(Robot.find(params[:id]).user_id).robot.level)
+				Battle.create(:winner => Robot.find(params[:id]).name, :oponent_id => Robot.find(params[:id]).id, :oponent_type => params[:oponent], 
+				:robot_id => current_user.robot.id, :combat_log => combat_log)
+				rewarding(User.find(Robot.find(params[:id]).user_id), User.find(Robot.find(params[:id]).user_id).robot.max_experience + 
+				(current_user.robot.level - User.find(Robot.find(params[:id]).user_id).robot.level), 
+				User.find(Robot.find(params[:id]).user_id).robot.max_experience/7 + User.find(Robot.find(params[:id]).user_id).robot.level)
 			else 
-				Battle.create(:winner => Mob.find(params[:id]).name, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent], :robot_id => current_user.robot.id, :combat_log => combat_log)	
+				Battle.create(:winner => Mob.find(params[:id]).name, :oponent_id => Mob.find(params[:id]).id, :oponent_type => params[:oponent], 
+				:robot_id => current_user.robot.id, :combat_log => combat_log)	
 			end
 		end
 			
@@ -240,26 +249,26 @@ class UserController < ApplicationController
 	end
 
 
-	def rewarding(winner, gold, experience)
+	def rewarding(winner, gold, experience)		
 		winner.resource.gold += gold
 		winner.resource.save
+		message_con = "Congratulations! You have won the battle. Your rewards are: Gold: #{gold}"
+		if rand(1..4) == 3 
+			winner.resource.electricity += rand(10..50)
+			message_con += ", Electricity: #{winner.resource.electricity}"
+			winner.resource.oil += rand(10..50)
+			message_con += ", Oil: winner.resource.oil"
+		end
+		message_con += ", Experience: #{experience}. Good Luck!"
+		winner.resource.save
+		m = Message.create(:from_user => "Service", :title => "Rewarding", :published_at => Time.now(),:unread => true ,:to_user => winner.username, :content => message_con)
 		check_for_level(experience, winner)
-		check_for_bonus(winner)
 
 	end
 
 	def battlefield_list
-		#tuk shte ima spisak na vsichki hora podredeni sprqmo negoviq lvl koito toi moje da bie (ne se biqt)
 		@users = User.all
 
-	end
-
-	def check_for_bonus(winner)
-		if rand(1..4) == 3 
-			winner.resource.electricity += rand(10..50)
-			winner.resource.oil += rand(10..50)
-		end
-		winner.resource.save
 	end
 
 	def check_for_level(experience, winner)
@@ -386,24 +395,21 @@ class UserController < ApplicationController
 		end
 	end
 
-	def messages
-
-	end
-
-	def general_shop
-
-	end
-
-	def consumables_shop
-
-	end
-
-	def vipzone
-
-	end
-
 	def search
+		if params[:name]  
+			@data=params[:name]
+ 			@users = User.where("username like ?","%#{@data}%" )
+ 		
+ 		end
+ 	end
 
+	def change_picture
+		@img = rand(1..15)
+	end
+	def set_picture
+		new_pic = params[:id].to_s
+		current_user.picture = new_pic
+		redirect_to root_path
 	end
 
 	def fight

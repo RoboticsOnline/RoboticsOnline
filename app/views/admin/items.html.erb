@@ -1,0 +1,70 @@
+<div id="main-content" class="container">
+  <div class="row">
+    <div id="main" class="main-content span9">
+        <div class="row">
+          <div class="span6 offset3" align="center">
+              <h1>Admin panel for items</h1>
+              <%= form_for :item do |f| %>
+              
+              <% if @item.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item for being create:</h2>
+
+                  <ul>
+                  <% @item.errors.full_messages.each do |itm| %>
+                    <li><%= itm %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="field">
+                <%= f.label :name %><br>
+                <%= f.text_field :name %>
+              </div>
+              <div class="field">
+                <%= f.label :price %><br>
+                <%= f.text_field :price %>
+              </div>
+              <div class="field">
+                <%= f.label :attack %><br>
+                <%= f.text_field :attack %>
+              </div>
+              <div class="field">
+                <%= f.label :strength %><br>
+                <%= f.text_field :strength %>
+              </div>
+              <div class="field">
+                <%= f.label :agility %><br>
+                <%= f.text_field :agility %>
+              </div>
+              <div class="field">
+                <%= f.label :intelligence %><br>
+                <%= f.text_field :intelligence %>
+              </div>
+              <div class="field">
+                <%= f.label :stamina %><br>
+                <%= f.text_field :stamina %>
+              </div>
+              <div class="field">
+                <%= f.label :defence %><br>
+                <%= f.text_field :defence %>
+              </div>
+              <div class="field">
+                <%= f.label :armor %><br>
+                <%= f.text_field :armor %>
+              </div>
+              <div class="actions">
+                <%= f.submit "Create", :class => 'btn btn-success'  %>
+              </div>
+            <% end %>
+              <%= link_to 'Back to admin panel',  admin_index_path, :class => 'btn btn-success'  %>
+          </div>
+        </div>
+    </div>          
+  </div>
+</div>
+
+
+
+

@@ -10,7 +10,6 @@ class CreateStats < ActiveRecord::Migration
 		t.integer :armor, :default => 100
 		t.integer :attack, :default => 200
 		t.integer :robot_id
-
     end
   end
 end

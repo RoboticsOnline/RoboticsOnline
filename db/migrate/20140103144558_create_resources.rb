@@ -7,7 +7,6 @@ class CreateResources < ActiveRecord::Migration
 		t.integer :oil, :default => 150
 		t.integer :cristals, :integer => 2
 		t.integer :user_id
-
     end
   end
 end

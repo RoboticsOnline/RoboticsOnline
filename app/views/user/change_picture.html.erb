@@ -1,0 +1,17 @@
+<div id="main-content" class="container">
+	<div class="row">
+		<div class="siderbar">
+
+			<%= render'sidebar'%>
+
+		</div>
+		<div id="main" class="main-content span9">
+			<div class="row">
+				<div align="center" id="change_pic" class="offset3">
+					<img src="/assets/mob/<%= @img %>.jpg"/>
+					<%= button_to "Make this my profile picture", set_picture_path({id: @img}), :method => :get %>			
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

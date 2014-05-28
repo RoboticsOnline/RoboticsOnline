@@ -29,7 +29,7 @@
 				<div class="navbar-inner">
 					<div class="container">
 						<% if user_signed_in? %>
-							<%= link_to '<div id="logo" class="colored pull-left">RoboticsOnline</div>'.html_safe, user_path%>
+							<%= link_to '<div id="logo" class="colored pull-left">RoboticsOnline</div>'.html_safe, root_path%>
 						<% else %>
 							<%= link_to '<div id="logo" class="colored pull-left">RoboticsOnline</div>'.html_safe, root_path%>
 						<% end %>
@@ -43,7 +43,7 @@
 						<div class="nav-collapse main-menu collapse">
 							<% if user_signed_in? %>
 								<ul class="main-menu pull-right">
-									<li><%= link_to '<i class="fa fa-home"></i>'.html_safe, user_path%></li>
+									<li><%= link_to '<i class="fa fa-home"></i>'.html_safe, root_path%></li>
 									<li><%= link_to "Guilds", guilds_path %></li>
 									<li><%= link_to "Friends", friends_path %></li>
 									<li><%= link_to "Battles", battles_path %></li>
@@ -53,8 +53,8 @@
 										<ul class="dropdown-menu">
 											<li class="divider"></li>
 											<li class="nav-header">Edit Profile</li>
-											<li><%= link_to "Change Password", user_path, :method => :get %></li>
-											<li><%= link_to "Change Picture", user_path, :method => :get %></li>
+											<li><%= link_to "Change Password", change_password_path, :method => :get %></li>
+											<li><%= link_to "Change Picture", change_picture_path, :method => :get %></li>
 											<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 										</ul>
 									</li><!-- /dropdown -->
@@ -85,18 +85,31 @@
 							<div class="">
 								<ul class="nav">
 									<li class="active current-user"><a href=""> <%= current_user.username%> </a></li>
-									<li class="disabled"><a class='inactive' href="">Level <%= current_user.robot.level%></a></li>
-									<li class='progress-bar'>
-										<div class="progress progress-warning progress-striped active" id="experience">
-											<div class="bar" style="width:<%= x = current_user.robot.current_experience.to_f / current_user.robot.max_experience.to_f * 100.0 %>%;"> <%= current_user.robot.current_experience%></div> <small class='pull-right'> <%= current_user.robot.max_experience%> </small>
-										</div>
-									</li><!-- /progress-bar -->
-								</ul><!-- /nav -->
-								<div class="stats">
 
-									<%= render'resource'%>
+									<% if current_user.admin.nil? %>
+										<li class="disabled"><a class='inactive' href="">Level <%= current_user.robot.level%></a></li>
+										<li class='progress-bar'>
+											<div class="progress progress-warning progress-striped active" id="experience">
+												<div class="bar" style="width:<%= x = current_user.robot.current_experience.to_f / current_user.robot.max_experience.to_f * 100.0 %>%;"> <%= current_user.robot.current_experience%></div> <small class='pull-right'> <%= current_user.robot.max_experience%> </small>
+											</div>
+										</li><!-- /progress-bar -->
+										</ul><!-- /nav -->
+											<div class="stats">
 
-								</div>
+												<%= render'resource'%>
+
+											</div>
+								<% else %>
+									<li class="disabled"><a class='inactive' href="">Permission <%= current_user.admin.permission%></a></li>
+									<li class="disabled"><a href="/messages"><i class='fa fa-envelope-o'>  <%= Message.where(:to_user => current_user.username).where(:unread => true).count %></i></a></li>
+									</ul><!-- /nav -->
+									<div align="center">
+									 	<%= link_to 'Users', admin_users_path, :class => 'btn btn-success'  %>
+	              						<%= link_to 'Items', admin_items_path, :class => 'btn btn-success'  %>
+	              						<%= link_to 'Mobs',  admin_mobs_path, :class => 'btn btn-success'  %>
+              						</div>
+										
+              					<% end %>
 							<div>
 
 						</div><!-- /container -->
@@ -112,7 +125,7 @@
 			<%= link_to "Team", team_path %><a href=""></a>
 			<%= link_to "Contacts", contacts_path %><a href=""></a>
 			<%= link_to "Game Rules", game_rules_path %><a href=""></a>
-			<%= link_to "Ticket", ticket_path %></li>
+			<%= link_to "Ticket", messages_ticket_path %></li>
 		</div>
 		<div id="footer">
 			<div class="container">
@@ -130,6 +143,7 @@
 
 		<script src="http://code.jquery.com/jquery.js"></script>
 		<script src="/assets/bootstrap.min.js"></script>
+		<script type="text/javascript">$('.dropdown-toggle').dropdown();</script>
 
 	</body>
 </html>

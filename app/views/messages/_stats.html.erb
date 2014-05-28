@@ -1,0 +1,112 @@
+<ul id="stats">
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Attack">Attack</p>
+		<span class="pull-right">
+			<%= current_user.robot.stat.attack/2 %> - <%= current_user.robot.stat.attack %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.attack <= 500 %>
+					<%= button_to set_stat_path({id:"1"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Strength">Strength</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.strength %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.strength <= 200 %>
+					<%= button_to set_stat_path({id:"2"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li> 
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Agility">Agility</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.agility %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.agility <= 200 %>
+					<%= button_to set_stat_path({id:"3"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>							
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	</li> 
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Intelligence">Intelligence</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.intelligence %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.intelligence <= 200 %>
+					<%= button_to set_stat_path({id:"4"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>							
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	</li> 
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Stamina">Stamina</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.stamina %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.stamina <= 200 %>
+					<%= button_to set_stat_path({id:"5"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>							
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	</li> 
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Defence">Defence</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.defence %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.defence <= 400 %>
+					<%= button_to set_stat_path({id:"6"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>							
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	</li>  
+	<li class="stat">
+		<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Armor">Armor</p> 
+		<span class="pull-right"> 
+			<%= current_user.robot.stat.armor %> 
+			<% if current_user.robot.unused_talent_points > 0 %>
+				<% if current_user.robot.stat.armor <= 400 %>
+					<%= button_to set_stat_path({id:"7"}), remote: true, :method => :get do %>
+						<i class="fa fa-plus-circle"></i>
+					<% end %>							
+				<% else %>
+					<i class="fa fa-plus-circle disabled"></i>
+				<% end %>
+			<% end %>
+		</span>
+	</li>
+	</li>
+</ul>
