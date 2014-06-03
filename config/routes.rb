@@ -2,7 +2,9 @@ RoboticsOnline::Application.routes.draw do
 
   resources :pictures
 
-  devise_for :users
+  devise_for :users, :controllers => { 
+    :omniauth_callbacks => "omniauth_callbacks" 
+  }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -78,6 +80,7 @@ RoboticsOnline::Application.routes.draw do
     get 'change_password' => :change_password
     get 'search' => :search
     post 'search' => :search
+    get 'friendlist' => :friendlist
 
     post 'user/success_transaction1' => :success_transaction1
     post 'user/canceled_transaction1' => 'user#canceled_transaction1'

@@ -9,11 +9,17 @@
 #test {
 	width: 150px;
 	height: 150px;
+	margin-bottom: 85px;
 }
 
 #main img {
 	width: 100%;
 	height: 150px;
+}
+
+#main #mob_fight {
+	width: 100%;
+	height: 125px !important;
 }
 
 #main .progress {
@@ -94,9 +100,9 @@ h1 {
 	color:#A4A4A4; 
 	text-decoration: none;	
 }
-#change_pic {
-	width: 300px;
-	height: 250px;
+#change_pic img {
+	width: 339px !important;
+	height: 255px !important;
 	margin-top: 30px;
 }
 #change_pic button_to {

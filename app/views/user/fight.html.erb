@@ -9,14 +9,14 @@
 			<div class="row">
 				<% @fight_mob.each do |m| %>
 					<div class="span3 offset1">
-						<h4><%= m.name%></h4>
 						<div class="mob" id="test">
+							<h4><%= m.name%></h4>
 							<% if m.lost %>
-								<%= button_to battlefield_mob_path({id: m.id}), :method => :get, :disabled => true do %>
+								<%= link_to battlefield_mob_path({id: m.id}), :method => :get, :disabled => true do %>
 									<img data-animation=false data-trigger=hover src="/assets/mob/<%= m.picture %>.jpg" alt="" data-toggle="popover" data-placement="right" data-content="Attack: <%= m.stat.attack / 2%> - <%= m.stat.attack%></br>Strength: <%= m.stat.strength%></br>Agility: <%= m.stat.agility%></br>Intelegence: <%= m.stat.intelligence%></br>Stamina: <%= m.stat.stamina%></br>Defence: <%= m.stat.defence%></br>Armor: <%= m.stat.armor%></br>Battle Stance: Off"  title="<%= m.name%>" data-original-title="Popover on top">
 								<% end %>
 							<% else %>
-								<%= button_to battlefield_mob_path({id: m.id}), :method => :get do %>
+								<%= link_to battlefield_mob_path({id: m.id}), :method => :get do %>
 									<img data-animation=false data-trigger=hover src="/assets/mob/<%= m.picture %>.jpg" alt="" data-toggle="popover" data-placement="right" data-content="Attack: <%= m.stat.attack / 2%> - <%= m.stat.attack%></br>Strength: <%= m.stat.strength%></br>Agility: <%= m.stat.agility%></br>Intelegence: <%= m.stat.intelligence%></br>Stamina: <%= m.stat.stamina%></br>Defence: <%= m.stat.defence%></br>Armor: <%= m.stat.armor%></br>Battle Stance: On"  title="<%= m.name%>" data-original-title="Popover on top">
 								<% end %>
 							<% end %>

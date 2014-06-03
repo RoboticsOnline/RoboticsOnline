@@ -11,22 +11,10 @@
 					<h4 class="section-title">Your equipment</h4>
 					<div class="item empty"></div><!-- /item -->
 					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
+					<div class="item empty"></div><!-- /item -->					
 				</div><!-- /equipment -->
 				<div class="inventory span6">
 					<h4 class="section-title">Inventory</h4>
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
@@ -49,7 +37,7 @@
 						<% @battles.first(10).reverse_each do |b| %>
 							<% if b.robot_id == current_user.robot.id %>
 								<li class ="list_name">
-									<%= link_to current_user.username, show_user_path({username: current_user.username}) %>  attacked 
+									<%= current_user.username %>  attacked 
 									<% if b.oponent_type == "Robot" %>
 										<%= link_to Robot.find(b.oponent_id).name, show_user_path({username: Robot.find(b.oponent_id).name}) %>
 										(Robot)
@@ -65,7 +53,8 @@
 									<% end %>
 								</li>
 							<% else %>
-								<li><%= current_user.username %> was attacked by <%= Robot.find(b.robot_id).name %>
+								<li class ="list_name" >
+									<%= current_user.username %> was attacked by <%= link_to Robot.find(b.robot_id).name, show_user_path({username: Robot.find(b.robot_id).name}) %>
 									(Robot) and 
 									<% if b.winner == current_user.username %>
 										won the battle !!!

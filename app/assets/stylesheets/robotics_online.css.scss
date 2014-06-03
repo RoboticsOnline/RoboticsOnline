@@ -13,10 +13,11 @@
 
     /* Carousel base class */
     .carousel {
-      width: 750px;
+      margin-top: -100px;
+      width: 460px;
       margin-bottom: 60px;
       margin-right: 100px;
-      margin-left: 0;
+      margin-left: -20px;
     }
 
     .carousel-control {
@@ -36,12 +37,12 @@
       position: absolute;
       top: 0;
       left: 0;
-      min-width: 100%;
-      height: 500px;
+      width: 460px;
+      height: 350px;
     }
 
-    #sign_ip {
-        margin-left: 50px;
+    #sign_up {
+        margin-top: -120px;
     }
     #begin {
         margin-top: 140px;

@@ -21,16 +21,28 @@
 
 			<div class="user-info">
 				<h2 class='user-name'> <%= @user.username%> </h2>
+				<h4 class='user-name'> Guild: <%= current_user.guild.name %></h4>
 				<h4 class="user-level">Level: <%= @user.robot.level%> </h4>
 				<% if @user.robot.unused_talent_points > 0 %>
 					<div style="display: inline;">
 						<span class="label label-warning" id="unused_talent_points"> +<%= @user.robot.unused_talent_points%> </span>
 					</div>
 				<% end %>
+				<div style="display: inline-block">
+					<div id="friend" style="display: inline-block">
+					
+						<%= render'friend' %>
+
+					</div>
+				</div>
 			</div>
 
 			<div class="profile-image">
-				<img src="/assets/user/<%= @user.picture%>" alt="">
+				<% if @user.pictures.last %>
+					<%= image_tag @user.pictures.last.avatar.url(:medium) %>
+				<% else %>
+					<img src="/assets/user/profile-img.png" alt="">
+				<% end %> 
 			</div>
 			<div class='progress-bar'>
 						<div class="progress progress-danger progress-striped active" id="health">
@@ -43,47 +55,47 @@
 			<div class="stats">
 				<ul id="stats">
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Attack">Attack</p>
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This is the range of a normal robotic's hit" title="" data-original-title="Attack">Attack</p>
 						<span class="pull-right">
 							<%= @user.robot.stat.attack/2 %> - <%= @user.robot.stat.attack %> 
 						</span>
 					</li>
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Strength">Strength</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This is the power of the special attack, which is engaged on every third hit" title="" data-original-title="Strength">Strength</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.strength %> 
 						</span>
 					</li> 
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Agility">Agility</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This is the chance of striking an attack with 40% more power" title="" data-original-title="Agility">Agility</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.agility %> 
 						</span>
 					</li>
 					</li> 
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Intelligence">Intelligence</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This is the resource, required for using the special attack" title="" data-original-title="Intelligence">Intelligence</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.intelligence %> 
 						</span>
 					</li>
 					</li> 
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Stamina">Stamina</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="These are the hit points of the robot" title="" data-original-title="Stamina">Stamina</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.stamina %> 
 						</span>
 					</li>
 					</li> 
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Defence">Defence</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This is the chance of completely evading an attack" title="" data-original-title="Defence">Defence</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.defence %> 
 						</span>
 					</li>
 					</li>  
 					<li class="stat">
-						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="Test" title="" data-original-title="Armor">Armor</p> 
+						<p style="display: inline" data-animation=false data-trigger=hover alt="" data-toggle="popover" data-placement="top" data-content="This attribute's purpose is to reduce the enemies damage" title="" data-original-title="Armor">Armor</p> 
 						<span class="pull-right"> 
 							<%= @user.robot.stat.armor %> 
 						</span>
@@ -100,21 +112,9 @@
 					<div class="item empty"></div><!-- /item -->
 					<div class="item empty"></div><!-- /item -->
 					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
-					<div class="item empty"></div><!-- /item -->
 				</div><!-- /equipment -->
 				<div class="inventory span6">
 					<h4 class="section-title">Inventory</h4>
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
-						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
 						<div class="item empty"></div><!-- /item -->
@@ -137,7 +137,7 @@
 						<% @battles.first(10).reverse_each do |b| %>
 							<% if b.robot_id == @user.robot.id %>
 								<li class ="list_name">
-									<%= link_to @user.username, show_user_path({username: @user.username}) %> attacked 
+									<%= @user.username %> attacked 
 									<% if b.oponent_type == "Robot" %>
 									<%= link_to Robot.find(b.oponent_id).name, show_user_path({username:Robot.find(b.oponent_id).name}) %>
 										(Robot)
@@ -154,7 +154,7 @@
 								</li>
 							<% else %>
 								<li class="list_name">
-									<%= link_to @user.username, show_user_path({username: @user.username}) %> 
+									<%= @user.username %> 
 									was attacked by 
 									<%= link_to Robot.find(b.robot_id).name, show_user_path({username: Robot.find(b.robot_id).name}) %>
 									(Robot) and 

@@ -21,11 +21,22 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
         devise_parameter_sanitizer.for(:sign_up) << :username
     end
-	   protect_from_forgery
-       def resource_name
-	   	   :user
-	   end
+    protect_from_forgery
+    def resource_name
+    	   :user
+    end
 
+    def admin?
+        @admin = false
+        if not current_user.nil?
+            Admin.all.each do |a|
+                if a.user_id == current_user.id
+                    @admin = true
+                end
+            end
+        end
+        @admin 
+    end
 	   def resource
 	       @resource ||= User.new
 	   end

@@ -3,7 +3,7 @@
 
     	<div id="main" class="main-content span9 offset1">
       		<div class="row">
-      			<h2 align="center"> People Online </h2>
+      			<h2 align="center"> Your Friend list </h2>
       			<% if @users.nil? %>
       				<p> There are currently no users online </p>
       			<% else %> 
@@ -13,34 +13,69 @@
 							<th class="list_name">Username</th>
 							<th class="list_name">Level</th>
 							<th class="list_name">Battles</th>
-							<th class="list_name">Battles Won</th>
-							<th class="list_name">Battles Lost</th>
+							<th class="list_name">Status</th>
+							<th class="list_name">Current gold</th>
 						</tr>
 						<% rank = 0 %>
-						<% @users.each do |u| %>
-							<tr>
-								<td> <%= rank += 1 %> </td>
-								<td class="list_name"> 
-									<%= link_to u.username, show_user_path({username: u.username}) %>
-								</td>
-								<td> 
-									<%= u.robot.level %>
-								</td>
-								<% b = Battle.where(:robot_id => u.robot.id) + Battle.where(:oponent_id => u.robot.id)
-										@wins = 0
-										@lost = 0
-										b.each do |f|
-											if f.winner == u.username
-												@wins += 1
-											else 
-												@lost += 1
-											end 
-										end
-									%>
-								<td> <%= @wins + @lost %></td>
-								<td> <%= @wins %></td>
-								<td> <%= @lost %></td>		
-							</tr>	
+						<% current_user.friends.each do |u| %>
+							<% if User.find(u.friend_id) != current_user %>
+								<tr>
+									<td> <%= rank += 1 %> </td>
+									<td class="list_name"> 
+										<%= link_to User.find(u.friend_id).username, show_user_path({username: User.find(u.friend_id).username}) %>
+									</td>
+									<td> 
+										<%= User.find(u.friend_id).robot.level %>
+									</td>
+									<% b = Battle.where(:robot_id => User.find(u.friend_id).robot.id) + Battle.where(:oponent_id => User.find(u.friend_id).robot.id)
+											@wins = 0
+											@lost = 0
+											b.each do |f|
+												if f.winner == User.find(u.friend_id).username
+													@wins += 1
+												else 
+													@lost += 1
+												end 
+											end
+										%>
+									<td> <%= @wins + @lost %></td>
+									<td> Offline</td>
+									<td> <%= User.find(u.friend_id).resource.gold %></td>
+									<% if current_user.friends.find_by_friend_id(User.find(u.friend_id).id) %>	
+										<td> Friend </td>		
+									<% end %>	
+								</tr>
+							<% end %>
+						<% end %>
+						<% @random.each do |u| %>
+							<% if u != current_user && !current_user.friends.find_by_friend_id(u.id) %>
+								<tr>
+									<td> <%= rank += 1 %> </td>
+									<td class="list_name"> 
+										<%= link_to u.username, show_user_path({username: u.username}) %>
+									</td>
+									<td> 
+										<%= u.robot.level %>
+									</td>
+									<% b = Battle.where(:robot_id => u.robot.id) + Battle.where(:oponent_id => u.robot.id)
+											@wins = 0
+											@lost = 0
+											b.each do |f|
+												if f.winner == u.username
+													@wins += 1
+												else 
+													@lost += 1
+												end 
+											end
+										%>
+									<td> <%= @wins + @lost %></td>
+									<td> Offline</td>
+									<td> <%= u.resource.gold %></td>
+									<% if current_user.friends.find_by_friend_id(u.id) %>	
+										<td> Friend </td>		
+									<% end %>	
+								</tr>
+							<% end %>	
 						<% end %>
 					</table>
 				<% end %>

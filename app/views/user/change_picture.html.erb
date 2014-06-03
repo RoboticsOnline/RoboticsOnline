@@ -7,9 +7,28 @@
 		</div>
 		<div id="main" class="main-content span9">
 			<div class="row">
-				<div align="center" id="change_pic" class="offset3">
-					<img src="/assets/mob/<%= @img %>.jpg"/>
-					<%= button_to "Make this my profile picture", set_picture_path({id: @img}), :method => :get %>			
+				<h2 align="center"> Change your picture </h2>
+				<div align="center" id="change_pic" >
+					<% if current_user.pictures.last %>
+						<%= image_tag current_user.pictures.last.avatar.url(:medium) %>
+					<% else %>
+						<img src="/assets/user/profile-img.png" alt="">
+					<% end %>
+					<%= form_for (@picture), :url => pictures_path, :html => { :multipart => true } do |f| %>
+					  	<p id="notice">
+					  		<% if notice != "Picture wasn't successfully created." %>
+					  			<% notice = "" %>
+					  		<% end %>
+				  			<%= notice %>
+					  	</p>
+
+				  		<div class="field">
+					    	<%= f.file_field :avatar %>
+					  	</div>
+					  	<div class="actions">
+					    	<%= f.submit %>
+					  	</div>
+					<% end %>			
 				</div>
 			</div>
 		</div>

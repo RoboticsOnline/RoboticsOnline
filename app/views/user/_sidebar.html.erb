@@ -18,7 +18,8 @@
 
 	<div class="user-info">
 		<h2 class='user-name'> <%= current_user.username%> </h2>
-		<h4 class="user-level">Level: <%= current_user.robot.level%> </h4>
+		<h4 class='user-name'> Guild: <%= current_user.guild.name %></h4>
+		<h4 class="user-level"> Level: <%= current_user.robot.level%> </h4>
 		<% if current_user.robot.unused_talent_points > 0 %>
 			<div style="display: inline;">
 				<span class="label label-warning" id="unused_talent_points"> +<%= current_user.robot.unused_talent_points%> </span>
@@ -27,7 +28,11 @@
 	</div>
 
 	<div class="profile-image">
-		<img src="/assets/user/<%= current_user.picture%>" alt="">
+		<% if current_user.pictures.last %>
+			<%= image_tag current_user.pictures.last.avatar.url(:medium) %>
+		<% else %>
+			<img src="/assets/user/profile-img.png" alt="">
+		<% end %>
 	</div>
 	<div class='progress-bar'>
 		<div class="progress progress-danger progress-striped active" id="health">

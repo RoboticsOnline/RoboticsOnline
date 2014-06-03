@@ -1,0 +1,11 @@
+<div id="friend" style="display: inline-block">
+	<% if current_user.friends.find_by_friend_id(@user.id) %>
+		<%= link_to friendlist_path({id: @user.id}), :method => :get, remote: true do %>
+			<img src="/assets/bann.png" alt="Remove from frinedlist" style="width: 15px; height: 15px; margin-left: 5px"/>
+		<% end %>
+	<% else %>
+		<%= link_to friendlist_path({id: @user.id}), :method => :get, remote: true do %>
+			<img src="/assets/favorite.png" alt="Add to frinedlist" style="width: 15px; height: 15px; margin-left: 5px"/>
+		<% end %>
+	<% end %>
+</div>

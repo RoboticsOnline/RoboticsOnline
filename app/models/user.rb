@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  after_create :create_robot_for_user, :create_resource_for_user
+  after_create :create_robot_for_user, :create_resource_for_user, :set_guild
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :password, :password_confirmation,
@@ -16,21 +16,46 @@ class User < ActiveRecord::Base
   has_one :resource
   has_many :messages
   has_one :admin
-
-  def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.id = auth.uid
-      user.username = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+  has_many :pictures
+  has_many :friends
+  belongs_to :guild
+  
+    def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+        user = User.where(:provider => auth.provider, :uid => auth.uid).first
+        if user
+            return user
+        else
+            registered_user = User.where(:email => auth.info.email).first
+            if registered_user
+                return registered_user
+            else
+                user = User.create(username:auth.extra.raw_info.name,
+                        provider:auth.provider,
+                                uid:auth.uid,
+                                email:auth.info.email,
+                                password:Devise.friendly_token[0,20]
+                        )
+                    auth.info.image
+            end    
+        end
     end
-  end
+  
+    def set_guild
+        placed = false
+        while !placed
+            g_id = rand(3..Guild.all.count)
+            if Guild.all.find(g_id)
+              self.guild_id = g_id
+              self.save
+              placed = true
+            end
+        end       
+    end
 
-  def create_robot_for_user
- 	  self.robot = Robot.create(:name => username);
-  end
-  def create_resource_for_user
- 	  self.resource = Resource.create
-  end
+    def create_robot_for_user
+        self.robot = Robot.create(:name => username)
+    end
+    def create_resource_for_user
+        self.resource = Resource.create
+    end
 end

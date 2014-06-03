@@ -402,41 +402,25 @@ class UserController < ApplicationController
  		
  		end
  	end
+	
+	def friendlist 
+  		if not current_user.friends.find_by_friend_id(params[:id])
+        	Friend.create(:user_id => current_user.id, :friend_id => params[:id])
+  		else  
+        	current_user.friends.find_by_friend_id(params[:id]).delete
+      	end
+      	@user = User.find(params[:id])
+      	
+      	respond_to do |format|
+        	format.js
+      	end
+  	end
 
 	def change_picture
-		@img = rand(1..15)
-	end
-	def set_picture
-		new_pic = params[:id].to_s
-		current_user.picture = new_pic
-		redirect_to root_path
+		@picture = Picture.new
 	end
 
 	def fight
-
 		@fight_mob = Mob.find_all_by_robot_id(current_user.robot.id)
-
 	end 
-	
-	def vipzone
-
-	end
-
-	def success_transaction1
-		user_resource = current_user.resource
-		user_resource.cristals += 10
-		user_resource.save
-	end
-
-	def success_transaction2
-		user_resource = current_user.resource
-		user_resource.cristals += 100
-		user_resource.save
-	end
-
-	def success_transaction3
-		user_resource = current_user.resource
-		user_resource.cristals += 500
-		user_resource.save
-	end
 end

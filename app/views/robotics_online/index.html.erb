@@ -4,7 +4,7 @@
 	<div class="row" id="begin">
 		<!-- Carousel
 			================================================== -->
-		<div class="span8 offset1">
+		<div class="span7 offset1">
 			<div id="myCarousel" class="carousel slide">
 				<div class="carousel-inner">
 					<div class="item active ">
@@ -21,7 +21,7 @@
 				<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div><!-- /.carousel -->
 		</div>
-		<div class="span2 offset1">
+		<div class="span3 offset1">
 			<div id="sign_up">
 		    	<h3>Registration</h3>
 
@@ -39,7 +39,9 @@
 					<%= f.submit "Sign up", :class => "btn btn-info" %>
 				<% end %>
 	   		</div> <!--/sign_up -->
-	   		
+	   		<div style="margin-top: 13px">
+				<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info" %>
+			</div>
 		</div>
 	</div><!--row-->		
 </div>

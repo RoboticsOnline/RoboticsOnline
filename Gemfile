@@ -6,7 +6,7 @@ ruby '2.0.0'
 gem 'rails', '4.0.2'
 gem 'rails_12factor'
 
-gem 'paperclip' 
+gem 'paperclip', "~> 3.5.3"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
@@ -15,6 +15,8 @@ group :assets do
   gem 'font-awesome-rails'
 end
 
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

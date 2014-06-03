@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  before_filter :access
 	def index
 		if current_user.nil? || current_user.admin.nil? 
 			redirect_to root_path 
@@ -42,4 +43,10 @@ class AdminController < ApplicationController
 			redirect_to root_path 
 		end
 	end
+	private
+	def access
+      unless admin?
+        redirect_to root_path
+      end
+    end
 end

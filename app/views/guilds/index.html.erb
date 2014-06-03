@@ -1,6 +1,42 @@
 <div id="main-content" class="container">
 	<div class="row">
-		<h2 align="center">The Best Guilds</h1>
-		<p><i>Currently the aren't any guilds</i></p>
+    	<div id="main" class="main-content span9 offset1">
+      		<div class="row">
+				<h2 align="center">The Best Guilds</h1>
+				<table class="table" id="ranklist">
+					<tr>
+						<th> Rank </th>
+						<th class="list_name">Name</th>
+						<th class="list_name">Users</th>
+						<th class="list_name">Overall level</th>
+						<th class="list_name">Battles</th>
+					</tr>
+					<% rank = 0 %>
+					<% @guilds.each do |g| %>
+						<tr>
+							<td> <%= rank += 1 %> </td>
+							<td class="list_name"> 
+								<%= g.name %>
+							</td>
+							<td> <%= g.users.count %></td>
+							<% overall_battles = 0 
+								overall_levels = 0 
+								g.users.each do |u|
+									overall_battles += Battle.where(:robot_id => u.robot.id).count + Battle.where(:oponent_id => u.robot.id).count
+									overall_levels += u.robot.level
+								end
+							%>
+							<td><%= if g.users.count != 0 
+										overall_levels / g.users.count 
+									else 
+										0
+									end %></td>
+
+							<td><%= overall_battles %></td>
+						</tr>	
+					<% end %>					
+				</table>
+			</div>
+		</div>
 	</div>
 </div>

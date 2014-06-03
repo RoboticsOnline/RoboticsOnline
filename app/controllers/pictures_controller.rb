@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_filter :access, :except => [:create]
 
   # GET /pictures
   # GET /pictures.json
@@ -25,14 +26,13 @@ class PicturesController < ApplicationController
   # POST /pictures.json
   def create
     @picture = Picture.new(picture_params)
+    current_user.pictures << @picture
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @picture }
+        format.html { redirect_to root_path, notice: 'Picture was successfully created.' }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+        format.html { redirect_to change_picture_path, notice: "Picture wasn't successfully created." }
       end
     end
   end
@@ -62,6 +62,11 @@ class PicturesController < ApplicationController
   end
 
   private
+    def access
+      unless admin?
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_picture
       @picture = Picture.find(params[:id])
@@ -69,6 +74,6 @@ class PicturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
-      params.require(:picture).permit(:user_id)
+      params.require(:picture).permit(:user_id, :avatar)
     end
 end

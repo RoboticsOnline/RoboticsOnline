@@ -15,7 +15,7 @@ class Robot < ActiveRecord::Base
   end
 
   def create_mob_for_robot
-	self.mobs << Mob.create(:name => "Roshan", :level => 1, :talent_points => 8, :picture => "1");
+	  self.mobs << Mob.create(:name => "Roshan", :level => 1, :talent_points => 8, :picture => "1");
     self.mobs << Mob.create(:name => "Balanar", :level => 1, :talent_points => 9, :picture => "2");
     self.mobs << Mob.create(:name => "Zefs", :level => 1, :talent_points => 10, :picture => "3");
     self.mobs << Mob.create(:name => "Riki", :level => 1, :talent_points => 10, :picture => "4");
