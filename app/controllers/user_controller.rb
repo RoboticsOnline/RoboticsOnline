@@ -28,6 +28,30 @@ class UserController < ApplicationController
 		
 	end
 
+	def success_transaction1
+		user_resource = current_user.resource
+		user_resource.cristals += 10
+		user_resource.save
+
+		redirect_to root_path
+	end
+
+	def success_transaction2
+		user_resource = current_user.resource
+		user_resource.cristals += 100
+		user_resource.save
+
+		redirect_to root_path
+	end
+
+	def success_transaction3
+		user_resource = current_user.resource
+		user_resource.cristals += 500
+		user_resource.save
+
+		redirect_to root_path
+	end
+
 	def get_consumables
 		if current_user.resource.gold >= 30 
 			if params[:consumable] == "Electricity"
